@@ -1,0 +1,16 @@
+
+[ 규칙 ]
+1. 커밋 시, 커밋 제목에 이슈 번호 달기
+2. 1 commit 1기능 : 기능 단위로 커밋 쪼개기
+3. 해당 이슈의 개발이 완료 후, merge까지 되면 이슈 닫기 (PR 후 merge되면, issue 닫기 버튼 클릭)
+4. PR 날릴 때 merge conflict 해결하고 날리기, 에러가 있는 상태로는 절대 PR 날리지 말기 (중요)
+    4-1. 본인의 feature branch에서 바로 팀/develop 으로 PR 작성 시,
+         초록색으로 Able to merge가 뜨지 않으면 반드시 본인 레포에서 내에서 merge conflict 해결 후 PR 날리기
+         ( merge conflict 해결 방법 : https://maemae22.tistory.com/88 참고 )
+    4-2. 프로그램이 정상적으로 돌아가지 않을 시, PR 금지
+5. PR 날릴 때 해당 개발 내용에 대해서 PR 제목 및 내용 작성하기
+6. Git-flow 전략 활용하기 (feature branch 생성하여 개발)
+
+[ 권장 ]
+1. 팀 Repo에 Merge(PR Close)된 것이 있으면 변경 사항 확인하기
+   (코드까지 보진 않더라도, commit 및 commit message 확인하여 프로젝트 진행상황 확인)

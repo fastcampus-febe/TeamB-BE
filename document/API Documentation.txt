@@ -1,0 +1,17 @@
+
+[ API 명세서 작성 방법 (API 명세서에 들어가야 하는 내용) ]
+1. Method Type + url 작성
+2. 뭐하는 url (api)인지 설명 적기 + 인증 필요 여부 (접근 권한)
+3. Request Body 작성 (필드명, 자료형, 필수여부, 설명)
+4. Response Body 작성 (필드명, 자료형, 필수여부, 설명)
+
+=> POSTMAN을 활용하여 API 명세서 작성 예정
+1. 작성 방법(공식문서) : https://learning.postman.com/docs/publishing-your-api/documenting-your-api/
+2. 작성 방법(블로그) : https://velog.io/@yukyung/POSTMAN%EC%9C%BC%EB%A1%9C-API-%EB%AC%B8%EC%84%9C%ED%99%94-%EC%A7%B1-%EC%89%BD%EA%B2%8C-%ED%95%98%EA%B8%B0
+3. 예시 : https://documenter.getpostman.com/view/11682851/TzJvex3F#9ace5a1b-1489-4a9a-8938-64b5d797a37e
+
+추후 API 명세서가 작성 완료되면, document 폴더에 추가 예정
+
+===========================================================================================
+
+참고 : https://judicious-crafter-477.notion.site/SWAGGER-API-b85914a0e53843c3ac34c0b64d35e76d

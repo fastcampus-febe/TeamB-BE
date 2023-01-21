@@ -1,0 +1,21 @@
+
+[ TeamB-BE ]
+Team Repository : https://github.com/fastcampus-febe/TeamB-BE
+Team Backlog : https://github.com/orgs/fastcampus-febe/projects/8
+Team Milestone : https://github.com/fastcampus-febe/TeamB-BE/milestones
+
+===========================================================================================
+
+[ TeamB-BE Member ]
+
+김예은
+GitHub : https://github.com/maemae22
+Tech Blog : https://maemae22.tistory.com/
+
+권동현
+GitHub : https://github.com/DongHyos
+Tech Blog : https://dong8707.tistory.com/
+
+전홍석
+GitHub : https://github.com/codingvegeta
+Tech Blog : https://codingvegeta.tistory.com/
