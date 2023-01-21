@@ -1,0 +1,14 @@
+안녕하세요 !
+프로젝트 진행을 위해 프로젝트 구조를 잡아두었고,
+Team Backlog, Milestone, 스프린트 생성 및 설정해두었습니다.
+(이번 프로젝트는 김은호 강사님의 개발 방식을 따라보려고 합니당)
+⭐Closed 된 PR 및 Commit, Commit message 보시고 프로젝트 진행상황 확인해주세요.⭐
+
+참고로 All 주석처리 되어있는 것은 예제파일과 Log 설정파일 입니다.
+예제파일은 참고용으로 추가해두었고, 추후 삭제 예정입니다.
+Log 관련 설정파일은 LogAdvice.java / logback-spring.xml / application.properties (한줄) 으로 총 3개입니다.
+Log AOP 설정하실 분들은 해당 파일 주석처리 해제하시면 되고, 이에 따른 수정사항은 commit은 하지 말아주세요 !
+
+이 파일이 속해있는 document 폴더에는 추후 erd, use-case, API 명세서 등이 추가될 예정입니다.
+현재 document 폴더에 있는 파일 6개 모두 꼼꼼히 확인해주세요 !! (일정, 규칙 등)
+마음에 안드시거나 수정하시고 싶은 부분은 편하게 Slack 으로 알려주세요 ~

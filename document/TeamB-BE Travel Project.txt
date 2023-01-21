@@ -1,0 +1,41 @@
+
+[ Travel Project ]
+- JDK 11
+- Spring Boot 2.7.8
+- Gradle
+- DB : MariaDB (후에 Amazon RDS - MySQL이든 MariaDB로 변경 고려)
+- Lombok
+- ORM : Spring Data JPA
+- Tools : IntelliJ, DBeaver, Git, Github, GitKraken,
+          Postman(Mock Server, API Docs), Swagger, Amazon EC2 (배포),
+          Notion, Google Sheets, Slack
+- REST API로 구현
+- View 쪽은 FrontEnd와 협업
+
+[ 개발 기능, Stack (예정) ]
+1. Pagination (필요하다면)
+2. JWT
+3. 외부 API DB에 저장해서 사용해보기
+4. 카카오페이 결제기능 (후원하기)
+5. 회원가입 시 우편번호 검색 : 다음 우편번호 API 사용
+6. 아이디 중복 확인 구현
+7. 다양한 검색 기능, 정렬 기능 (select문, order by -)
+8. Mock Server 이용하여 프엔과 원활한 협업
+9. 공유 DB 사용 (Amazon RDS), 배포(Amazon EC2), Spring Data JPA, DB 설계(ErdCloud), REST API 설계, 기본적인 CRUD, Swagger, 프로젝트 구조 잡기
+10. 외부 API 최대 호출 시 데이터가 어떻게 오는지, 어떻게 처리할지 고민
+11. Entity 및 다양한 DTO 사용 (필요한 데이터만 전달할 수 있게 !)
+12. API 설계 경험, 공유 DB 배포 및 사용 경험
+13. 기능별이 아닌, 이슈별 개발 진행
+14. API 설계 및 명세서 작성
++@
+
+[ 도전? ]
+1. XSS 공격 방어 코드 넣기
+2. Github Actions 이용해보기 (배포 관련)
+3. OAuth2
+4. 카카오맵 API (여행지 위치 표시)
+5. 게시판에 웹 에디터 API 사용 (사진 첨부 가능하도록 구현)
+6. 웹 캘린더 API 사용 (사용이 필요하다면 !)
+7. 아이디 / 비밀번호 찾기 시 이메일 인증 또는 핸드폰 인증 (네이버에서 제공하는 API가 있음)
+8. 댓글 대댓글 기능 구현 (depth)
+9. 스프링 알림 기능 구현
