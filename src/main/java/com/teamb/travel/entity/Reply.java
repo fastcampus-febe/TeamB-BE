@@ -1,6 +1,9 @@
 package com.teamb.travel.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,6 +11,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reply {
 
     @Id
@@ -24,7 +29,7 @@ public class Reply {
     private Double rate;
     private String review;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contentid")
+    @JoinColumn(name = "contentid", referencedColumnName = "contentid")
     private PlaceDetail placeDetail;
 
 }
