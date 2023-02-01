@@ -2,6 +2,7 @@ package com.teamb.travel.controller;
 
 
 import com.teamb.travel.dto.PlaceByLocationResDto;
+import com.teamb.travel.dto.PlaceByTagResDto;
 import com.teamb.travel.service.PlaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,12 @@ public class TourListController {
     @GetMapping("/tourlist/location")
     public ResponseEntity<List<PlaceByLocationResDto>> tourListByLocation(@RequestParam("pageno") int pageNo, @RequestParam("areacode") String areaCode) {
         List<PlaceByLocationResDto> resDtos = placeService.selectByLocationPlaceList(areaCode, pageNo);
+        return new ResponseEntity<>(resDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/tourlist/hashtag")
+    public ResponseEntity<List<PlaceByTagResDto>> tourListByLocation(@RequestParam("pageno") int pageNo, @RequestParam("hashtag") List<String> hashtag) {
+        List<PlaceByTagResDto> resDtos = placeService.selectByTagPlaceList(hashtag, pageNo);
         return new ResponseEntity<>(resDtos, HttpStatus.OK);
     }
 }
