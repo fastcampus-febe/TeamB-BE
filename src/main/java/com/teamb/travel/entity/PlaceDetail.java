@@ -3,7 +3,6 @@ package com.teamb.travel.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Getter
 @Builder
@@ -11,10 +10,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @ToString
-public class PlaceDetail implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PlaceDetail{
     private Long id;
+    @Id
     private String contentid;
     private String title;
     private String telname;
@@ -35,31 +33,4 @@ public class PlaceDetail implements Serializable {
     private String chkbabycarriage;
     private String expguide;
     private String chkcreditcard;
-
-    @Builder
-    public PlaceDetail(String contentid, String title, String telname, String homepage, String overview, String parking,
-                       String expagerange, String chkpet, String infocenter, String restdate, String opendate, String accomcount,
-                       String usetime, String heritage1, String heritage2, String heritage3, String userseason, String chkbabycarriage,
-                       String expguide, String chkcreditcard) {
-        this.contentid = contentid;
-        this.title = title;
-        this.telname = telname;
-        this.homepage = homepage;
-        this.overview = overview;
-        this.parking = parking;
-        this.expagerange = expagerange;
-        this.chkpet = chkpet;
-        this.infocenter = infocenter;
-        this.restdate = restdate;
-        this.opendate = opendate;
-        this.accomcount = accomcount;
-        this.usetime = usetime;
-        this.heritage1 = heritage1;
-        this.heritage2 = heritage2;
-        this.heritage3 = heritage3;
-        this.userseason = userseason;
-        this.chkbabycarriage = chkbabycarriage;
-        this.expguide = expguide;
-        this.chkcreditcard = chkcreditcard;
-    }
 }

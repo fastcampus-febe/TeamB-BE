@@ -12,9 +12,10 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class IsIndoor {
     @Id
-    private Long placeId;
+    private String placeId;
     private String mapX;
     private String mapY;
     private String placeName;
