@@ -14,4 +14,6 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     nativeQuery = true)
     public List<String> findByAllContentid();
     public List<Place> findAllByAreacodeOrderByIdAsc(String areaCode, Pageable pageable);
+
+    public List<Place> findAllByCat3InOrderByIdAsc(List<String> hashtag, Pageable pageable);
 }
