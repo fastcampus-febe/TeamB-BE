@@ -23,7 +23,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PlaceDetailService {
+public class WeatherService {
 
     public WeatherResDto weatherResDtos(String mapX, String mapY) throws IOException, ParseException {
         List<WeatherMiddleResDto> middleRes = selectMiddleWeather(mapX, mapY);
@@ -32,6 +32,7 @@ public class PlaceDetailService {
         WeatherResDto weatherResDto = new WeatherResDto(middleRes, lastRes);
         return weatherResDto;
     }
+
     public List<WeatherMiddleResDto> selectMiddleWeather(String mapX, String mapY) throws IOException, ParseException {
         List<WeatherMiddleResDto> resDtos = new ArrayList<>();
 
