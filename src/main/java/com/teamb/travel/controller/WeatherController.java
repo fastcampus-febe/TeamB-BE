@@ -2,7 +2,7 @@ package com.teamb.travel.controller;
 
 import com.teamb.travel.dto.MapReqDto;
 import com.teamb.travel.dto.WeatherResDto;
-import com.teamb.travel.service.PlaceDetailService;
+import com.teamb.travel.service.WeatherService;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpStatus;
@@ -17,10 +17,10 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class WeatherController {
 
-    private final PlaceDetailService placeDetailService;
+    private final WeatherService weatherService;
 
     @GetMapping("/tourlist/weather")
     public ResponseEntity<WeatherResDto> findWeather(@RequestBody MapReqDto mapReqDto) throws IOException, ParseException {
-        return new ResponseEntity<>(placeDetailService.weatherResDtos(mapReqDto.getMapX(), mapReqDto.getMapY()), HttpStatus.OK);
+        return new ResponseEntity<>(weatherService.weatherResDtos(mapReqDto.getMapX(), mapReqDto.getMapY()), HttpStatus.OK);
     }
 }
