@@ -16,5 +16,5 @@ public class PlaceListResDTO {
     private String firstimage;
     private String infocenter; // place_detail 테이블
     private Double rate; // reply 테이블
-//    private String inOut; // is_indoor 테이블
+    private String inOut; // is_indoor 테이블
 }
