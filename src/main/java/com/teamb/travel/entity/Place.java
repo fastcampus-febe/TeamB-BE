@@ -10,6 +10,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Getter
 @ToString
+@Builder
 public class Place {
     @Id
     private String contentid;

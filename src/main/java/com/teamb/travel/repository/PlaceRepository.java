@@ -16,4 +16,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     public List<Place> findAllByAreacodeOrderByIdAsc(String areaCode, Pageable pageable);
 
     public List<Place> findAllByCat3InOrderByIdAsc(List<String> hashtag, Pageable pageable);
+
+    // where title like '%title%' : 해당 title이 포함된 Place들을 반환
+    public List<Place> findPlacesByTitleContaining(String title, Pageable pageable);
 }
