@@ -73,11 +73,28 @@ public class PlaceListService {
 
     public List<PlaceListResDTO> selectPlacesByTitleContaining(PlaceListReqDTO placeListReqDTO, int pageNo) {
         Pageable pageable = PageRequest.of(pageNo-1, 12);
-        
+
         List<Place> places = repository.findPlacesByTitleContaining(placeListReqDTO.getTitle(), pageable);
 
         return PlacesListByPlaceList(places);
     }
+
+    public List<PlaceListResDTO> selectByLocationPlaceList(String areaCode, int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo-1, 12);
+
+        List<Place> places = repository.findAllByAreacodeOrderByIdAsc(areaCode, pageable);
+
+        return PlacesListByPlaceList(places);
+    }
+
+    public List<PlaceListResDTO> selectByTagPlaceList(List<String> hashtag, int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo-1, 12);
+
+        List<Place> places = repository.findAllByCat3InOrderByIdAsc(hashtag, pageable);
+
+        return PlacesListByPlaceList(places);
+    }
+
 
 
 }
