@@ -1,9 +1,6 @@
 package com.teamb.travel.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +10,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class IsIndoor {
     @Id
     private String placeId;
@@ -22,4 +20,3 @@ public class IsIndoor {
     private String inOut;
 
 }
-
