@@ -36,9 +36,9 @@ public class PlaceDetailService {
         PlaceDetail placeDetail = findPlaceDetail.orElseThrow(() -> new IllegalStateException("잘못된 contenid입니다."));
         PlaceDetailMaker placeDetailMaker = new PlaceDetailMaker(placeDetail);
 
-        Reply findReply = replyRepository.findByRate(contenid);
-        IsIndoor findInOut = isIndoorRepository.findByMapXAndMapYInout(placeMaker.getMapx(), placeMaker.getMapy());
-        EtcMaker etcMaker = new EtcMaker(findReply, findInOut);
+        Double placeDetailPageRate = replyRepository.findByPlaceDetailInNativeQuery(contenid);
+        IsIndoor findInOut = isIndoorRepository.findAllByMapXAndMapY(placeMaker.getMapx(), placeMaker.getMapy());
+        EtcMaker etcMaker = new EtcMaker(placeDetailPageRate, findInOut);
 
         return new PlaceDetailResDTO(placeMaker, placeDetailMaker, etcMaker);
     }

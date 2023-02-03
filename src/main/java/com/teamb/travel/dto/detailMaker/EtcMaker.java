@@ -12,11 +12,11 @@ public class EtcMaker {
     //is_indoor
     private String inOut;
 
-    public EtcMaker(@Nullable Reply reply, @Nullable IsIndoor isIndoor) {
-        if (reply == null) {
-            rate = 0.0;
+    public EtcMaker(@Nullable Double rate, @Nullable IsIndoor isIndoor) {
+        if (rate == null) {
+            this.rate = 0.0;
         } else {
-            rate = reply.isRate();
+            this.rate = rate;
         }
         if (isIndoor == null) {
             inOut = null;

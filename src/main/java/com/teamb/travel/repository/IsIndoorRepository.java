@@ -11,6 +11,4 @@ public interface IsIndoorRepository extends JpaRepository<IsIndoor, Long> {
     @Query(value = "select * from is_indoor a where left(a.mapx, 7) = (:mapX) AND left(a.mapy, 6) = (:mapY)", nativeQuery = true)
     IsIndoor findAllByMapXAndMapY(@Param("mapX") String mapX, @Param("mapY") String mapY);
 
-    @Query(value = "select ii from IsIndoor ii where ii.mapX = :mapX and ii.mapY = :mapY")
-    IsIndoor findByMapXAndMapYInout(@Param("mapX") String mapX, @Param("mapY") String mapY);
 }
