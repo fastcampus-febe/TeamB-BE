@@ -34,30 +34,31 @@ public class PlaceListController {
         PlaceListReqDTO placeListReqDTO = new PlaceListReqDTO(keyword);
 
         List<PlaceListResDTO> resDtos = placeListService.selectPlacesByTitleContaining(placeListReqDTO, pageable);
-        return new Result(resDtos);
+        return new Result(resDtos.size(), resDtos);
     }
 
     @GetMapping("/tourlist/location")
     public Result tourListByLocation(Pageable pageable, @RequestParam("areacode") String areaCode) {
         List<PlaceListResDTO> resDtos = placeListService.selectByLocationPlaceList(areaCode, pageable);
-        return new Result(resDtos);
+        return new Result(resDtos.size(), resDtos);
     }
 
     @GetMapping("/tourlist/hashtag")
     public Result tourListByLocation(Pageable pageable, @RequestParam("hashtag") List<String> hashtag) {
         List<PlaceListResDTO> resDtos = placeListService.selectByTagPlaceList(hashtag, pageable);
-        return new Result(resDtos);
+        return new Result(resDtos.size(), resDtos);
     }
 
     @GetMapping("/tourlist")
     public Result mainPlace(Pageable pageable) {
         List<PlaceListResDTO> placeListResDTOS = placeListService.mainPlaceTourlist(pageable);
-        return new Result(placeListResDTOS);
+        return new Result(placeListResDTOS.size(), placeListResDTOS);
     }
 
     @Data
     @AllArgsConstructor
     static class Result<T> {
+        private int count;
         private T data;
     }
 
