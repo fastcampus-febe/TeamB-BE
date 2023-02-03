@@ -50,6 +50,13 @@ public class ReplyController {
         return responseEntity;
     }
 
+    @DeleteMapping("/tourlist/review")
+    public ResponseEntity<String> replyDelete(@RequestBody ReplyUpdateReqDTO replyUpdateReqDTO) {
+        String deleteReply = replyService.deleteReply(replyUpdateReqDTO);
+        ResponseEntity responseEntity = new ResponseEntity(deleteReply, HttpStatus.OK);
+        return responseEntity;
+    }
+
     @Data
     @AllArgsConstructor
     static class Result<T> {
