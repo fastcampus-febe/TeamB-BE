@@ -1,6 +1,7 @@
 package com.teamb.travel.service;
 
 import com.teamb.travel.dto.ReplyCheckReqDto;
+import com.teamb.travel.dto.ReplyListDTO;
 import com.teamb.travel.dto.ReplyUpdateResDTO;
 import com.teamb.travel.entity.Reply;
 import com.teamb.travel.repository.ReplyRepository;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,5 +37,11 @@ public class ReplyService {
         } catch (NullPointerException e) {
             return "failed";
         }
+    }
+
+    public List<ReplyListDTO> findByContentid(String contentid) {
+        List<Reply> findReplies = replyRepository.findReplysByPlaceDetailContentid(contentid);
+        List<ReplyListDTO> result = findReplies.stream().map(reply -> new ReplyListDTO(reply)).collect(Collectors.toList());
+        return result;
     }
 }

@@ -7,11 +7,10 @@ import com.teamb.travel.service.ReplyService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ReplyController {
@@ -35,6 +34,12 @@ public class ReplyController {
         } else {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("tourlist/review")
+    public Result replyListForPlaceDetailPage(@RequestParam("contentid") String contentid) {
+        return new Result(replyService.findByContentid(contentid));
+
     }
 
     @Data
