@@ -21,6 +21,6 @@ public class WeatherController {
 
     @GetMapping("/tourlist/weather")
     public ResponseEntity<WeatherResDTO> findWeather(@RequestBody MapReqDTO mapReqDto) throws IOException, ParseException {
-        return new ResponseEntity<>(weatherService.weatherResDtos(mapReqDto.getMapX(), mapReqDto.getMapY()), HttpStatus.OK);
+        return new ResponseEntity<>(weatherService.findWeatherResDTOByMapXAndMapY(mapReqDto.getMapX(), mapReqDto.getMapY()), HttpStatus.OK);
     }
 }

@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WeatherService {
 
-    public WeatherResDTO weatherResDtos(String mapX, String mapY) throws IOException, ParseException {
+    public WeatherResDTO findWeatherResDTOByMapXAndMapY (String mapX, String mapY) throws IOException, ParseException {
         List<WeatherShortMiddleResDTO> shortRes = selectShortWeather(mapX, mapY);
         List<WeatherShortMiddleResDTO> middleRes = selectMiddleWeather(mapX, mapY);
         List<WeatherLastResDTO> lastRes = selectLastWeather(mapX, mapY);
@@ -35,36 +35,132 @@ public class WeatherService {
     }
 
     public List<WeatherShortMiddleResDTO> selectShortWeather(String mapX, String mapY) throws IOException, ParseException {
-        List<WeatherShortMiddleResDTO> resDtos = new ArrayList<>();
+        List<WeatherShortMiddleResDTO> shortResDTOs = new ArrayList<>();
 
-        LocalDateTime date = LocalDateTime.now();
-        LocalDate localDate = LocalDate.now();
+        for (int i = 1; i <= 3; i++) {
+            JSONArray shortJSONArray = selectShortWeatherJSON(mapX, mapY, i);
 
-        if (date.getHour() < 18) {
-            localDate = LocalDate.now().minusDays(1);
-        }
+            // JSONArray(shortJSONArray)에서 필요한 값을 찾기 위해, index로 쓰일 값을 초기화함
+            int eightAmPOPRainNum = 0;
 
-        JSONObject keyObj = selectWeatherDetail(mapX, mapY);
-        JSONObject keyObjTemp = selectTemp(mapX, mapY);
+            // 필요한 값(오전 8시의 강수확률(POP) = eightAmPOPRainNum)을 찾기 위해서
+            // for문(반복문)을 돌며 JSONArray(shortJSONArray)에서 해당 index 값을 찾음
+            for (int k=0; k<shortJSONArray.size(); k++) {
+                JSONObject jsonObject = (JSONObject)shortJSONArray.get(k);
 
-        for (int i = 3; i < 8; i++) {
-            LocalDate dateList = localDate.plusDays(i);
-            String rainAm = String.valueOf(keyObj.get("rnSt" + i + "Am")) + "%";
-            String rainPm = String.valueOf(keyObj.get("rnSt" + i + "Pm")) + "%";
-            String weatherAm = String.valueOf(keyObj.get("wf" + i + "Am"));
-            String weatherPm = String.valueOf(keyObj.get("wf" + i + "Pm"));
-            String lowTemp = String.valueOf(keyObjTemp.get("taMin" + i));
-            String highTemp = String.valueOf(keyObjTemp.get("taMax" + i));
+                if (jsonObject.get("category").equals("POP") && jsonObject.get("fcstTime").equals("0800")) {
+                    eightAmPOPRainNum = k;
+                    break;
+                }
+            }
 
-            WeatherShortMiddleResDTO dto = WeatherShortMiddleResDTO.builder()
-                    .localDate(dateList).rainProbabilityAm(rainAm)
+            // 사용하는 날씨 api (https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15084084) 에서
+            // eightAmPOPRainNum(오전 8시의 강수확률(POP) 데이터가 있는 index 값)을 알면 나머지 필요한 정보의 index 값도 알 수 있으므로
+            // 위에서 찾은 eightAmPOPRainNum로 나머지 index 값도 구함.
+            int fivePmPOPRainNum = eightAmPOPRainNum+109;
+            int eightAmSKYWeatherNum = eightAmPOPRainNum-2;
+            int fivePmSKYWeatherNum = eightAmPOPRainNum+107;
+            int lowTempTMNNum = eightAmPOPRainNum-20;
+            int highTempTMXNum = eightAmPOPRainNum+89;
+
+            // WeatherShortMiddleResDTO로 만들기 위한 작업
+            // 위에서 찾은 index 값으로 데이터를 가져온다
+            LocalDate date = LocalDate.now().plusDays(i-1);
+            String rainAm = getFcstValueByJSONArrayIndex(shortJSONArray, eightAmPOPRainNum);
+            String rainPm = getFcstValueByJSONArrayIndex(shortJSONArray, fivePmPOPRainNum);
+
+            String weatherAmBeforeConvert = getFcstValueByJSONArrayIndex(shortJSONArray, eightAmSKYWeatherNum);
+            String weatherAm = convertWeatherToStringByWeatherNum(weatherAmBeforeConvert);
+            String weatherPmBeforeConvert = getFcstValueByJSONArrayIndex(shortJSONArray, fivePmSKYWeatherNum);
+            String weatherPm = convertWeatherToStringByWeatherNum(weatherPmBeforeConvert);
+
+            String lowTemp = getFcstValueByJSONArrayIndex(shortJSONArray, lowTempTMNNum);
+            String highTemp = getFcstValueByJSONArrayIndex(shortJSONArray, highTempTMXNum);
+
+            // WeatherShortMiddleResDTO 생성
+            WeatherShortMiddleResDTO shortResDTO = WeatherShortMiddleResDTO.builder()
+                    .localDate(date).rainProbabilityAm(rainAm)
                     .rainProbabilityPm(rainPm).weatherAm(weatherAm)
                     .weatherPm(weatherPm).lowTemp(lowTemp).highTemp(highTemp).build();
 
-            resDtos.add(dto);
+            // List<WeatherShortMiddleResDTO> shortResDTOs에 WeatherShortMiddleResDTO를 추가하고
+            shortResDTOs.add(shortResDTO);
         }
-        return resDtos;
+
+        // 그 List (List<WeatherShortMiddleResDTO> shortResDTOs) 를 반환
+        return shortResDTOs;
     }
+
+    public JSONArray selectShortWeatherJSON (String mapX, String mapY, int pageNo) throws IOException, ParseException {
+
+        String yesterday = LocalDate.now().minusDays(1).toString().replace("-", "");
+
+        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + "51%2Bc6%2BNBpG7JFhyeZbKn4BDMVtvgE6W15oUad4G2n74%2Bv7Bo4oHKoQL%2FwLSaBnD67u%2F5CorapB5I6WMBLpXEkg%3D%3D"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(String.valueOf(pageNo), "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("294", "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
+        urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode(yesterday, "UTF-8")); /*‘21년 6월 28일 발표*/
+        urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode("2300", "UTF-8")); /*06시 발표(정시단위) */
+        urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode(String.valueOf(Math.round(Float.parseFloat(mapY))), "UTF-8")); /*예보지점의 X 좌표값*/
+        urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode(String.valueOf(Math.round(Float.parseFloat(mapX))), "UTF-8")); /*예보지점의 Y 좌표값*/
+
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+        BufferedReader rd;
+
+        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        } else {
+            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+        }
+
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+
+        rd.close();
+        conn.disconnect();
+
+        // result는 api로부터 받아온 값
+        String result = sb.toString();
+
+        JSONParser parser = new JSONParser(); // Json parser를 만들어 만들어진 문자열 데이터를 객체화
+        JSONObject obj = (JSONObject) parser.parse(result);
+
+        JSONObject parse_response = (JSONObject) obj.get("response"); // response 키를 가지고 데이터를 파싱
+        JSONObject parse_body = (JSONObject) parse_response.get("body"); // response 로 부터 body 찾기
+        JSONObject parse_items = (JSONObject) parse_body.get("items"); // body 로 부터 items 찾기
+        JSONArray parse_item = (JSONArray) parse_items.get("item"); // items로 부터 itemlist 를 받기
+        return parse_item;
+    }
+
+    public String getFcstValueByJSONArrayIndex (JSONArray jsonArray, int jsonIndex) {
+        JSONObject jsonObject = (JSONObject)jsonArray.get(jsonIndex);
+        return String.valueOf(jsonObject.get("fcstValue"));
+    }
+
+    public String convertWeatherToStringByWeatherNum (String stringWeatherNum) {
+        double weatherNum = Double.parseDouble(stringWeatherNum);
+        String weatherString = "";
+
+        if ( weatherNum < 6 ) {
+            weatherString = "맑음";
+        } else if ( weatherNum < 9 ) {
+            weatherString = "구름많음";
+        } else if (weatherNum < 11) {
+            weatherString = "흐림";
+        } else {
+            weatherString = "?";
+        }
+
+        return weatherString;
+    }
+
 
     public List<WeatherShortMiddleResDTO> selectMiddleWeather(String mapX, String mapY) throws IOException, ParseException {
         List<WeatherShortMiddleResDTO> resDtos = new ArrayList<>();
@@ -81,8 +177,8 @@ public class WeatherService {
 
         for (int i = 3; i < 8; i++) {
             LocalDate dateList = localDate.plusDays(i);
-            String rainAm = String.valueOf(keyObj.get("rnSt" + i + "Am")) + "%";
-            String rainPm = String.valueOf(keyObj.get("rnSt" + i + "Pm")) + "%";
+            String rainAm = String.valueOf(keyObj.get("rnSt" + i + "Am"));
+            String rainPm = String.valueOf(keyObj.get("rnSt" + i + "Pm"));
             String weatherAm = String.valueOf(keyObj.get("wf" + i + "Am"));
             String weatherPm = String.valueOf(keyObj.get("wf" + i + "Pm"));
             String lowTemp = String.valueOf(keyObjTemp.get("taMin" + i));
@@ -113,7 +209,7 @@ public class WeatherService {
 
         for (int i = 8; i < 11; i++) {
             LocalDate dateList = localDate.plusDays(i);
-            String rain = String.valueOf(keyObj.get("rnSt" + i)) + "%";
+            String rain = String.valueOf(keyObj.get("rnSt" + i));
             String weather = String.valueOf(keyObj.get("wf" + i));
             String lowTemp = String.valueOf(keyObjTemp.get("taMin" + i));
             String highTemp = String.valueOf(keyObjTemp.get("taMax" + i));
@@ -228,41 +324,8 @@ public class WeatherService {
         JSONObject parse_bodyTemp = (JSONObject) parse_responseTemp.get("body"); // response 로 부터 body 찾기
         JSONObject parse_itemsTemp = (JSONObject) parse_bodyTemp.get("items"); // body 로 부터 items 찾기
         JSONArray parse_itemTemp = (JSONArray) parse_itemsTemp.get("item"); // items로 부터 itemlist 를 받기
-        System.out.println(urlBuilderTemp);
         return (JSONObject) parse_itemTemp.get(0);
     }
-
-//    public JSONObject selectShortWeatherJSON (String mapX, String mapY) throws IOException, ParseException {
-//
-//        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"); /*URL*/
-//        urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + "51%2Bc6%2BNBpG7JFhyeZbKn4BDMVtvgE6W15oUad4G2n74%2Bv7Bo4oHKoQL%2FwLSaBnD67u%2F5CorapB5I6WMBLpXEkg%3D%3D"); /*Service Key*/
-//        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
-//        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
-//        urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("XML", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
-//        urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode("20210628", "UTF-8")); /*‘21년 6월 28일 발표*/
-//        urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode("2300", "UTF-8")); /*06시 발표(정시단위) */
-//        urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode(String.valueOf(Math.round(Float.parseFloat(mapY))), "UTF-8")); /*예보지점의 X 좌표값*/
-//        urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode(String.valueOf(Math.round(Float.parseFloat(mapX))), "UTF-8")); /*예보지점의 Y 좌표값*/
-//        URL url = new URL(urlBuilder.toString());
-//        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//        conn.setRequestMethod("GET");
-//        conn.setRequestProperty("Content-type", "application/json");
-//        System.out.println("Response code: " + conn.getResponseCode());
-//        BufferedReader rd;
-//        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-//            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//        } else {
-//            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-//        }
-//        StringBuilder sb = new StringBuilder();
-//        String line;
-//        while ((line = rd.readLine()) != null) {
-//            sb.append(line);
-//        }
-//        rd.close();
-//        conn.disconnect();
-//        System.out.println(sb.toString());
-//    }
 
     public String findLocation(String mapX, String mapY) {
         if ((mapX.compareTo("124.6163553056") >= 0 && mapX.compareTo("127.7542483851") <= 0) && (mapY.compareTo("36.9044335076") >= 0 && mapY.compareTo("38.2366849576") <= 0)) {
