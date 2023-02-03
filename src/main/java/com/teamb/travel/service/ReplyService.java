@@ -57,4 +57,11 @@ public class ReplyService {
         replyRepository.delete(findReply);
         return "success";
     }
+
+    @Transactional
+    public String modified(ReplyModifiedReqDTO replyModifiedReqDTO) {
+        Reply findReply = replyRepository.findReplyByReviewId(replyModifiedReqDTO.getReviewId());
+        findReply.replyModified(replyModifiedReqDTO);
+        return "success";
+    }
 }
