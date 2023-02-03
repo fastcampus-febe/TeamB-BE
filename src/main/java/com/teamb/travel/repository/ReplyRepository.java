@@ -21,7 +21,5 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
     Reply findByReviewIdAndPassword(Long reviewId, String password);
 
-    @Query(value = "select r.rate from Reply r where r.placeDetailContentid = :contentid")
-    Reply findByRate(@Param("contentid") String contentid);
 
 }
