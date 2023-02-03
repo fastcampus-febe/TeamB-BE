@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Builder
-public class WeatherLastResDto {
+public class WeatherLastResDTO {
     private LocalDate localDate;
     private String weather;
     private String rainProbability;

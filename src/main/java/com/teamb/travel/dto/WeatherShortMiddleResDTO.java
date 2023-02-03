@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Builder
-public class WeatherMiddleResDto {
+public class WeatherShortMiddleResDTO {
     private LocalDate localDate;
     private String weatherAm;
     private String weatherPm;
