@@ -4,6 +4,8 @@ import com.teamb.travel.dto.ReplyCheckReqDto;
 import com.teamb.travel.dto.ReplyUpdateReqDTO;
 import com.teamb.travel.dto.ReplyUpdateResDTO;
 import com.teamb.travel.service.ReplyService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +20,10 @@ public class ReplyController {
     ReplyService replyService;
 
     @PostMapping("/tourlist/review/update")
-    public ResponseEntity<ReplyUpdateResDTO> findReplyByReviewId(@RequestBody ReplyUpdateReqDTO replyUpdateReqDTO) {
+    public Result findReplyByReviewId(@RequestBody ReplyUpdateReqDTO replyUpdateReqDTO) {
 
         ReplyUpdateResDTO replyUpdateResDTO = replyService.findReplyByReviewId(replyUpdateReqDTO.getReviewId());
-        return new ResponseEntity<>(replyUpdateResDTO, HttpStatus.OK);
+        return new Result(replyUpdateResDTO);
     }
 
     @PostMapping("/tourlist/review/check")
@@ -33,5 +35,11 @@ public class ReplyController {
         } else {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T> {
+        private T data;
     }
 }
