@@ -1,9 +1,6 @@
 package com.teamb.travel.controller;
 
-import com.teamb.travel.dto.ReplyCheckReqDto;
-import com.teamb.travel.dto.ReplyRequestDTO;
-import com.teamb.travel.dto.ReplyUpdateReqDTO;
-import com.teamb.travel.dto.ReplyUpdateResDTO;
+import com.teamb.travel.dto.*;
 import com.teamb.travel.service.ReplyService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -54,6 +51,13 @@ public class ReplyController {
     public ResponseEntity<String> replyDelete(@RequestBody ReplyUpdateReqDTO replyUpdateReqDTO) {
         String deleteReply = replyService.deleteReply(replyUpdateReqDTO);
         ResponseEntity responseEntity = new ResponseEntity(deleteReply, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    @PutMapping("/tourlist/review/update")
+    public ResponseEntity<String> replyModify(@RequestBody ReplyModifiedReqDTO replyModifiedReqDTO) {
+        String modified = replyService.modified(replyModifiedReqDTO);
+        ResponseEntity responseEntity = new ResponseEntity(modified, HttpStatus.OK);
         return responseEntity;
     }
 

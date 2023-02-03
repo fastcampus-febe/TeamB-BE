@@ -1,5 +1,6 @@
 package com.teamb.travel.entity;
 
+import com.teamb.travel.dto.ReplyModifiedReqDTO;
 import com.teamb.travel.dto.ReplyRequestDTO;
 import lombok.*;
 
@@ -43,5 +44,12 @@ public class Reply {
         this.rate = replyRequestDTO.getRate();
         this.review = replyRequestDTO.getContent();
         this.placeDetailContentid = replyRequestDTO.getContentid();
+    }
+
+    public void replyModified(ReplyModifiedReqDTO replyModifiedReqDTO) {
+        review = replyModifiedReqDTO.getReview();
+        visitDate = replyModifiedReqDTO.getVisitDate();
+        weather = replyModifiedReqDTO.getWeather();
+        rate = replyModifiedReqDTO.getRate();
     }
 }
