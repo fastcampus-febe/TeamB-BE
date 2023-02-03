@@ -1,5 +1,6 @@
 package com.teamb.travel.entity;
 
+import com.teamb.travel.dto.ReplyRequestDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,4 +35,13 @@ public class Reply {
         }
     }
 
+    public Reply(ReplyRequestDTO replyRequestDTO) {
+        this.memberId = replyRequestDTO.getMemberId();
+        this.password = replyRequestDTO.getPassword();
+        this.visitDate = replyRequestDTO.getVisitDate();
+        this.weather = replyRequestDTO.getWeather();
+        this.rate = replyRequestDTO.getRate();
+        this.review = replyRequestDTO.getContent();
+        this.placeDetailContentid = replyRequestDTO.getContentid();
+    }
 }

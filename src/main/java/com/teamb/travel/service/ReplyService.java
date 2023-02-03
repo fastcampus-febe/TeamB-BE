@@ -2,6 +2,7 @@ package com.teamb.travel.service;
 
 import com.teamb.travel.dto.ReplyCheckReqDto;
 import com.teamb.travel.dto.ReplyListDTO;
+import com.teamb.travel.dto.ReplyRequestDTO;
 import com.teamb.travel.dto.ReplyUpdateResDTO;
 import com.teamb.travel.entity.Reply;
 import com.teamb.travel.repository.ReplyRepository;
@@ -43,5 +44,11 @@ public class ReplyService {
         List<Reply> findReplies = replyRepository.findReplysByPlaceDetailContentid(contentid);
         List<ReplyListDTO> result = findReplies.stream().map(reply -> new ReplyListDTO(reply)).collect(Collectors.toList());
         return result;
+    }
+
+    public String save(ReplyRequestDTO replyRequestDTO) {
+        Reply reply = new Reply(replyRequestDTO);
+        replyRepository.save(reply);
+        return "success";
     }
 }
