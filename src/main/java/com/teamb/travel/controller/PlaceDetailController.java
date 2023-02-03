@@ -17,7 +17,7 @@ public class PlaceDetailController {
     private final PlaceDetailService placeDetailService;
 
     @GetMapping("/tourlist/detail")
-    public PlaceDetailResDTO placeDetailRes(@RequestParam("contenid") String contenid) {
-        return placeDetailService.getPlaceDetail(contenid);
+    public PlaceDetailResDTO placeDetailRes(@RequestParam("contentid") String contentid) {
+        return placeDetailService.getPlaceDetail(contentid);
     }
 }
