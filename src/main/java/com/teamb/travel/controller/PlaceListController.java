@@ -28,25 +28,25 @@ public class PlaceListController {
     @Autowired
     PlaceListService placeListService;
 
-
-
     @GetMapping("/tourlist/keyword")
-    public List<PlaceListResDTO> keywordPlacesSearch(@RequestParam String keyword, Pageable pageable) {
+    public Result tourListByKeyWord(@RequestParam String keyword, Pageable pageable) {
 
         PlaceListReqDTO placeListReqDTO = new PlaceListReqDTO(keyword);
-        return placeListService.selectPlacesByTitleContaining(placeListReqDTO, pageable);
+
+        List<PlaceListResDTO> resDtos = placeListService.selectPlacesByTitleContaining(placeListReqDTO, pageable);
+        return new Result(resDtos);
     }
 
     @GetMapping("/tourlist/location")
-    public ResponseEntity<List<PlaceListResDTO>> tourListByLocation(Pageable pageable, @RequestParam("areacode") String areaCode) {
+    public Result tourListByLocation(Pageable pageable, @RequestParam("areacode") String areaCode) {
         List<PlaceListResDTO> resDtos = placeListService.selectByLocationPlaceList(areaCode, pageable);
-        return new ResponseEntity<>(resDtos, HttpStatus.OK);
+        return new Result(resDtos);
     }
 
     @GetMapping("/tourlist/hashtag")
-    public ResponseEntity<List<PlaceListResDTO>> tourListByLocation(Pageable pageable, @RequestParam("hashtag") List<String> hashtag) {
+    public Result tourListByLocation(Pageable pageable, @RequestParam("hashtag") List<String> hashtag) {
         List<PlaceListResDTO> resDtos = placeListService.selectByTagPlaceList(hashtag, pageable);
-        return new ResponseEntity<>(resDtos, HttpStatus.OK);
+        return new Result(resDtos);
     }
 
     @GetMapping("/tourlist")
