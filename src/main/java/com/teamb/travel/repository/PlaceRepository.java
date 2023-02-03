@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Long> {
@@ -20,4 +21,6 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 
     // where title like '%title%' : 해당 title이 포함된 Place들을 반환
     public List<Place> findPlacesByTitleContaining(String title, Pageable pageable);
+
+    Optional<Place> findPlaceByContentid(String contentid);
 }

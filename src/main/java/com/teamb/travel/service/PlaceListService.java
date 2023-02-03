@@ -41,7 +41,7 @@ public class PlaceListService {
         for ( Place place : placeList) {
             String contentid = place.getContentid();
 
-            details.add(placeDetailRepository.findByContentid(contentid));
+            details.add(placeDetailRepository.findByContentid(contentid).get());
 
             Double avgRate = replyRepository.findByPlaceDetailInNativeQuery(contentid);
             if (avgRate == null) {

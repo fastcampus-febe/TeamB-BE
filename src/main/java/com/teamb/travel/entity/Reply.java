@@ -26,4 +26,12 @@ public class Reply {
     @Column(name = "contentid")
     private String placeDetailContentid;
 
+    public Double isRate() {
+        if (rate == null) {
+            return 0.0;
+        } else {
+            return rate;
+        }
+    }
+
 }
