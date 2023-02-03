@@ -1,16 +1,15 @@
 package com.teamb.travel.service;
 
-import com.teamb.travel.dto.ReplyCheckReqDto;
-import com.teamb.travel.dto.ReplyListDTO;
-import com.teamb.travel.dto.ReplyRequestDTO;
-import com.teamb.travel.dto.ReplyUpdateResDTO;
+import com.teamb.travel.dto.*;
 import com.teamb.travel.entity.Reply;
 import com.teamb.travel.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,6 +48,13 @@ public class ReplyService {
     public String save(ReplyRequestDTO replyRequestDTO) {
         Reply reply = new Reply(replyRequestDTO);
         replyRepository.save(reply);
+        return "success";
+    }
+
+    @Transactional
+    public String deleteReply(ReplyUpdateReqDTO replyUpdateReqDTO) {
+        Reply findReply = replyRepository.findReplyByReviewId(replyUpdateReqDTO.getReviewId());
+        replyRepository.delete(findReply);
         return "success";
     }
 }
