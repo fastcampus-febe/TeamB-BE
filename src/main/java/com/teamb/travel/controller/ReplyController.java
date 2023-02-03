@@ -1,6 +1,7 @@
 package com.teamb.travel.controller;
 
 import com.teamb.travel.dto.ReplyCheckReqDto;
+import com.teamb.travel.dto.ReplyRequestDTO;
 import com.teamb.travel.dto.ReplyUpdateReqDTO;
 import com.teamb.travel.dto.ReplyUpdateResDTO;
 import com.teamb.travel.service.ReplyService;
@@ -36,10 +37,17 @@ public class ReplyController {
         }
     }
 
-    @GetMapping("tourlist/review")
+    @GetMapping("/tourlist/review")
     public Result replyListForPlaceDetailPage(@RequestParam("contentid") String contentid) {
         return new Result(replyService.findByContentid(contentid));
 
+    }
+
+    @PostMapping("/tourlist/review/insert")
+    public ResponseEntity<String> replySave(@RequestBody ReplyRequestDTO replyRequestDTO) {
+        String savedReply = replyService.save(replyRequestDTO);
+        ResponseEntity responseEntity = new ResponseEntity(savedReply, HttpStatus.OK);
+        return responseEntity;
     }
 
     @Data
@@ -47,4 +55,5 @@ public class ReplyController {
     static class Result<T> {
         private T data;
     }
+
 }
