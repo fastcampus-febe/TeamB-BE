@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-public class MapReqDto {
+public class MapReqDTO {
     private String mapX;
     private String mapY;
 }
