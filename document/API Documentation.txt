@@ -10,7 +10,8 @@
 2. 작성 방법(블로그) : https://velog.io/@yukyung/POSTMAN%EC%9C%BC%EB%A1%9C-API-%EB%AC%B8%EC%84%9C%ED%99%94-%EC%A7%B1-%EC%89%BD%EA%B2%8C-%ED%95%98%EA%B8%B0
 3. 예시 : https://documenter.getpostman.com/view/11682851/TzJvex3F#9ace5a1b-1489-4a9a-8938-64b5d797a37e
 
-추후 API 명세서가 작성 완료되면, document 폴더에 추가 예정
+[ Travel Project API Docs ]
+- https://documenter.getpostman.com/view/24197140/2s8ZDcyKWn
 
 ===========================================================================================
 
