@@ -10,6 +10,7 @@ import com.teamb.travel.repository.PlaceDetailRepository;
 import com.teamb.travel.repository.PlaceRepository;
 import com.teamb.travel.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -86,4 +87,9 @@ public class PlaceListService {
         return PlacesListByPlaceList(places);
     }
 
+    public List<PlaceListResDTO> mainPlaceTourlist(Pageable pageable) {
+        Page<Place> pageableFind = placeRepository.findAll(pageable);
+        List<PlaceListResDTO> placeListResDTOS = PlacesListByPlaceList(pageableFind.toList());
+        return placeListResDTOS;
+    }
 }
