@@ -1,8 +1,8 @@
 package com.teamb.travel.service;
 
-import com.teamb.travel.dto.WeatherLastResDto;
-import com.teamb.travel.dto.WeatherMiddleResDto;
-import com.teamb.travel.dto.WeatherResDto;
+import com.teamb.travel.dto.WeatherLastResDTO;
+import com.teamb.travel.dto.WeatherShortMiddleResDTO;
+import com.teamb.travel.dto.WeatherResDTO;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,16 +25,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WeatherService {
 
-    public WeatherResDto weatherResDtos(String mapX, String mapY) throws IOException, ParseException {
-        List<WeatherMiddleResDto> middleRes = selectMiddleWeather(mapX, mapY);
-        List<WeatherLastResDto> lastRes = selectLastWeather(mapX, mapY);
+    public WeatherResDTO weatherResDtos(String mapX, String mapY) throws IOException, ParseException {
+        List<WeatherShortMiddleResDTO> shortRes = selectShortWeather(mapX, mapY);
+        List<WeatherShortMiddleResDTO> middleRes = selectMiddleWeather(mapX, mapY);
+        List<WeatherLastResDTO> lastRes = selectLastWeather(mapX, mapY);
 
-        WeatherResDto weatherResDto = new WeatherResDto(middleRes, lastRes);
+        WeatherResDTO weatherResDto = new WeatherResDTO(shortRes, middleRes, lastRes);
         return weatherResDto;
     }
 
-    public List<WeatherMiddleResDto> selectMiddleWeather(String mapX, String mapY) throws IOException, ParseException {
-        List<WeatherMiddleResDto> resDtos = new ArrayList<>();
+    public List<WeatherShortMiddleResDTO> selectShortWeather(String mapX, String mapY) throws IOException, ParseException {
+        List<WeatherShortMiddleResDTO> resDtos = new ArrayList<>();
 
         LocalDateTime date = LocalDateTime.now();
         LocalDate localDate = LocalDate.now();
@@ -55,7 +56,7 @@ public class WeatherService {
             String lowTemp = String.valueOf(keyObjTemp.get("taMin" + i));
             String highTemp = String.valueOf(keyObjTemp.get("taMax" + i));
 
-            WeatherMiddleResDto dto = WeatherMiddleResDto.builder()
+            WeatherShortMiddleResDTO dto = WeatherShortMiddleResDTO.builder()
                     .localDate(dateList).rainProbabilityAm(rainAm)
                     .rainProbabilityPm(rainPm).weatherAm(weatherAm)
                     .weatherPm(weatherPm).lowTemp(lowTemp).highTemp(highTemp).build();
@@ -65,8 +66,40 @@ public class WeatherService {
         return resDtos;
     }
 
-    public List<WeatherLastResDto> selectLastWeather(String mapX, String mapY) throws IOException, ParseException {
-        List<WeatherLastResDto> resDtos = new ArrayList<>();
+    public List<WeatherShortMiddleResDTO> selectMiddleWeather(String mapX, String mapY) throws IOException, ParseException {
+        List<WeatherShortMiddleResDTO> resDtos = new ArrayList<>();
+
+        LocalDateTime date = LocalDateTime.now();
+        LocalDate localDate = LocalDate.now();
+
+        if (date.getHour() < 18) {
+            localDate = LocalDate.now().minusDays(1);
+        }
+
+        JSONObject keyObj = selectWeatherDetail(mapX, mapY);
+        JSONObject keyObjTemp = selectTemp(mapX, mapY);
+
+        for (int i = 3; i < 8; i++) {
+            LocalDate dateList = localDate.plusDays(i);
+            String rainAm = String.valueOf(keyObj.get("rnSt" + i + "Am")) + "%";
+            String rainPm = String.valueOf(keyObj.get("rnSt" + i + "Pm")) + "%";
+            String weatherAm = String.valueOf(keyObj.get("wf" + i + "Am"));
+            String weatherPm = String.valueOf(keyObj.get("wf" + i + "Pm"));
+            String lowTemp = String.valueOf(keyObjTemp.get("taMin" + i));
+            String highTemp = String.valueOf(keyObjTemp.get("taMax" + i));
+
+            WeatherShortMiddleResDTO dto = WeatherShortMiddleResDTO.builder()
+                    .localDate(dateList).rainProbabilityAm(rainAm)
+                    .rainProbabilityPm(rainPm).weatherAm(weatherAm)
+                    .weatherPm(weatherPm).lowTemp(lowTemp).highTemp(highTemp).build();
+
+            resDtos.add(dto);
+        }
+        return resDtos;
+    }
+
+    public List<WeatherLastResDTO> selectLastWeather(String mapX, String mapY) throws IOException, ParseException {
+        List<WeatherLastResDTO> resDtos = new ArrayList<>();
 
         LocalDateTime date = LocalDateTime.now();
         LocalDate localDate = LocalDate.now();
@@ -85,7 +118,7 @@ public class WeatherService {
             String lowTemp = String.valueOf(keyObjTemp.get("taMin" + i));
             String highTemp = String.valueOf(keyObjTemp.get("taMax" + i));
 
-            WeatherLastResDto dto = WeatherLastResDto.builder()
+            WeatherLastResDTO dto = WeatherLastResDTO.builder()
                     .localDate(dateList).rainProbability(rain)
                     .weather(weather).lowTemp(lowTemp).highTemp(highTemp).build();
 
@@ -198,6 +231,38 @@ public class WeatherService {
         System.out.println(urlBuilderTemp);
         return (JSONObject) parse_itemTemp.get(0);
     }
+
+//    public JSONObject selectShortWeatherJSON (String mapX, String mapY) throws IOException, ParseException {
+//
+//        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"); /*URL*/
+//        urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + "51%2Bc6%2BNBpG7JFhyeZbKn4BDMVtvgE6W15oUad4G2n74%2Bv7Bo4oHKoQL%2FwLSaBnD67u%2F5CorapB5I6WMBLpXEkg%3D%3D"); /*Service Key*/
+//        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+//        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
+//        urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("XML", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
+//        urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode("20210628", "UTF-8")); /*‘21년 6월 28일 발표*/
+//        urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode("2300", "UTF-8")); /*06시 발표(정시단위) */
+//        urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode(String.valueOf(Math.round(Float.parseFloat(mapY))), "UTF-8")); /*예보지점의 X 좌표값*/
+//        urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode(String.valueOf(Math.round(Float.parseFloat(mapX))), "UTF-8")); /*예보지점의 Y 좌표값*/
+//        URL url = new URL(urlBuilder.toString());
+//        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//        conn.setRequestMethod("GET");
+//        conn.setRequestProperty("Content-type", "application/json");
+//        System.out.println("Response code: " + conn.getResponseCode());
+//        BufferedReader rd;
+//        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+//            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//        } else {
+//            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+//        }
+//        StringBuilder sb = new StringBuilder();
+//        String line;
+//        while ((line = rd.readLine()) != null) {
+//            sb.append(line);
+//        }
+//        rd.close();
+//        conn.disconnect();
+//        System.out.println(sb.toString());
+//    }
 
     public String findLocation(String mapX, String mapY) {
         if ((mapX.compareTo("124.6163553056") >= 0 && mapX.compareTo("127.7542483851") <= 0) && (mapY.compareTo("36.9044335076") >= 0 && mapY.compareTo("38.2366849576") <= 0)) {

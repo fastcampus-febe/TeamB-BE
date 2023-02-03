@@ -1,7 +1,7 @@
 package com.teamb.travel.controller;
 
-import com.teamb.travel.dto.MapReqDto;
-import com.teamb.travel.dto.WeatherResDto;
+import com.teamb.travel.dto.MapReqDTO;
+import com.teamb.travel.dto.WeatherResDTO;
 import com.teamb.travel.service.WeatherService;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
@@ -20,7 +20,7 @@ public class WeatherController {
     private final WeatherService weatherService;
 
     @GetMapping("/tourlist/weather")
-    public ResponseEntity<WeatherResDto> findWeather(@RequestBody MapReqDto mapReqDto) throws IOException, ParseException {
+    public ResponseEntity<WeatherResDTO> findWeather(@RequestBody MapReqDTO mapReqDto) throws IOException, ParseException {
         return new ResponseEntity<>(weatherService.weatherResDtos(mapReqDto.getMapX(), mapReqDto.getMapY()), HttpStatus.OK);
     }
 }
