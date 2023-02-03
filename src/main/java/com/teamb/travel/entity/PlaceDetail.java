@@ -3,6 +3,7 @@ package com.teamb.travel.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.StringTokenizer;
 
 @Getter
 @Builder
@@ -33,4 +34,16 @@ public class PlaceDetail{
     private String chkbabycarriage;
     private String expguide;
     private String chkcreditcard;
+
+    public String homepageTokenizer() {
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st = new StringTokenizer(homepage, "\"");
+        while (st.hasMoreTokens()) {
+            String s = st.nextToken();
+            if (s.startsWith("https:")) {
+                sb.append(s);
+            }
+        }
+        return sb.toString();
+    }
 }

@@ -8,10 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PlaceDetailRepository extends JpaRepository<PlaceDetail,Long> {
     List<PlaceDetail> findAllByContentidIn(@Param("contentid") List<String> contentid);
 
-    public PlaceDetail findByContentid(String contentid);
+//    public PlaceDetail findByContentid(String contentid);
+
+    Optional<PlaceDetail> findByContentid(String contentid);
 }
