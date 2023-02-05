@@ -1,4 +1,4 @@
-package com.teamb.travel.dto.detailMaker;
+package com.teamb.travel.dto.place.detailMaker;
 
 import com.teamb.travel.entity.Place;
 import lombok.Data;

@@ -1,13 +1,12 @@
 package com.teamb.travel.service;
 
-import com.teamb.travel.dto.PlaceDetailResDTO;
-import com.teamb.travel.dto.detailMaker.EtcMaker;
-import com.teamb.travel.dto.detailMaker.PlaceDetailMaker;
-import com.teamb.travel.dto.detailMaker.PlaceMaker;
+import com.teamb.travel.dto.place.PlaceDetailResDTO;
+import com.teamb.travel.dto.place.detailMaker.EtcMaker;
+import com.teamb.travel.dto.place.detailMaker.PlaceDetailMaker;
+import com.teamb.travel.dto.place.detailMaker.PlaceMaker;
 import com.teamb.travel.entity.IsIndoor;
 import com.teamb.travel.entity.Place;
 import com.teamb.travel.entity.PlaceDetail;
-import com.teamb.travel.entity.Reply;
 import com.teamb.travel.repository.IsIndoorRepository;
 import com.teamb.travel.repository.PlaceDetailRepository;
 import com.teamb.travel.repository.PlaceRepository;

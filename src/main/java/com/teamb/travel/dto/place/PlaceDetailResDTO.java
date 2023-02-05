@@ -1,8 +1,8 @@
-package com.teamb.travel.dto;
+package com.teamb.travel.dto.place;
 
-import com.teamb.travel.dto.detailMaker.EtcMaker;
-import com.teamb.travel.dto.detailMaker.PlaceDetailMaker;
-import com.teamb.travel.dto.detailMaker.PlaceMaker;
+import com.teamb.travel.dto.place.detailMaker.EtcMaker;
+import com.teamb.travel.dto.place.detailMaker.PlaceDetailMaker;
+import com.teamb.travel.dto.place.detailMaker.PlaceMaker;
 import lombok.Data;
 
 @Data
