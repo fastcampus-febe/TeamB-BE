@@ -11,14 +11,13 @@ import java.util.List;
 @Repository
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
-    public List<Reply> findReplysByPlaceDetailContentid(String contentid);
+    List<Reply> findReplysByPlaceDetailContentid(String contentid);
 
-    public Reply findReplyByReviewId(long reviewId);
+    Reply findReplyByReviewId(long reviewId);
 
     @Query(value = "select round(avg(r.rate), 1) from reply r where r.contentid IN (:contentid)", nativeQuery = true)
     Double findByPlaceDetailInNativeQuery(@Param("contentid") String contentid);
 
     Reply findByReviewIdAndPassword(Long reviewId, String password);
-
 
 }
