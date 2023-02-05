@@ -32,7 +32,7 @@ public class PlaceListService {
     }
 
     // placeList를 매개변수로 받으면 거기에 맞는 관광지 List를 반환하는 메서드
-    private List<PlaceListResDTO> PlacesListByPlaceList(List<Place> placeList) {
+    private List<PlaceListResDTO> placesListByPlaceList(List<Place> placeList) {
 
         List<PlaceDetail> details = new ArrayList<>();
         List<Double> rates = new ArrayList<>();
@@ -72,24 +72,24 @@ public class PlaceListService {
     public List<PlaceListResDTO> selectPlacesByTitleContaining(PlaceListReqDTO placeListReqDTO, Pageable pageable) {
 
         List<Place> places = placeRepository.findPlacesByTitleContaining(placeListReqDTO.getTitle(), pageable);
-        return PlacesListByPlaceList(places);
+        return placesListByPlaceList(places);
     }
 
     public List<PlaceListResDTO> selectByLocationPlaceList(String areaCode, Pageable pageable) {
 
         List<Place> places = placeRepository.findAllByAreacodeOrderByIdAsc(areaCode, pageable);
-        return PlacesListByPlaceList(places);
+        return placesListByPlaceList(places);
     }
 
     public List<PlaceListResDTO> selectByTagPlaceList(List<String> hashtag, Pageable pageable) {
 
         List<Place> places = placeRepository.findAllByCat3InOrderByIdAsc(hashtag, pageable);
-        return PlacesListByPlaceList(places);
+        return placesListByPlaceList(places);
     }
 
     public List<PlaceListResDTO> mainPlaceTourlist(Pageable pageable) {
         Page<Place> pageableFind = placeRepository.findAll(pageable);
-        List<PlaceListResDTO> placeListResDTOS = PlacesListByPlaceList(pageableFind.toList());
+        List<PlaceListResDTO> placeListResDTOS = placesListByPlaceList(pageableFind.toList());
         return placeListResDTOS;
     }
 }

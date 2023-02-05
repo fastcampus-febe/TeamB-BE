@@ -3,19 +3,12 @@ package com.teamb.travel.api.weather;
 import com.teamb.travel.api.UrlBuilderToJSONArray;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
