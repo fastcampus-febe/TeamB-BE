@@ -2,7 +2,7 @@ package com.teamb.travel.service.weather;
 
 import com.teamb.travel.api.weather.MiddleLastWeatherDetailApi;
 import com.teamb.travel.api.weather.TempApi;
-import com.teamb.travel.dto.WeatherShortMiddleResDTO;
+import com.teamb.travel.dto.weather.WeatherShortMiddleResDTO;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;

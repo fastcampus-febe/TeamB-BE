@@ -1,27 +1,13 @@
 package com.teamb.travel.service.weather;
 
-import com.teamb.travel.api.weather.MiddleLastWeatherDetailApi;
-import com.teamb.travel.api.weather.ShortWeatherApi;
-import com.teamb.travel.api.weather.TempApi;
-import com.teamb.travel.dto.WeatherLastResDTO;
-import com.teamb.travel.dto.WeatherShortMiddleResDTO;
-import com.teamb.travel.dto.WeatherResDTO;
+import com.teamb.travel.dto.weather.WeatherLastResDTO;
+import com.teamb.travel.dto.weather.WeatherShortMiddleResDTO;
+import com.teamb.travel.dto.weather.WeatherResDTO;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

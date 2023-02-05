@@ -1,7 +1,7 @@
 package com.teamb.travel.controller;
 
-import com.teamb.travel.dto.MapReqDTO;
-import com.teamb.travel.dto.WeatherResDTO;
+import com.teamb.travel.dto.weather.MapReqDTO;
+import com.teamb.travel.dto.weather.WeatherResDTO;
 import com.teamb.travel.service.weather.WeatherService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
