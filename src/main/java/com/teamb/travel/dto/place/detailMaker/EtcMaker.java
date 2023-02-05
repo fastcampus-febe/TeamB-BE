@@ -1,7 +1,6 @@
 package com.teamb.travel.dto.place.detailMaker;
 
 import com.teamb.travel.entity.IsIndoor;
-import com.teamb.travel.entity.Reply;
 import lombok.Data;
 import org.springframework.lang.Nullable;
 
