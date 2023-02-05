@@ -1,5 +1,6 @@
 package com.teamb.travel.api.weather;
 
+import com.teamb.travel.api.UrlBuilderToJSONArray;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,6 +24,7 @@ public class TempApi {
     // 기온 정보를 제공하는 외부 api에서 정보를 가져와 JSONObject로 반환함
 
     private final FindLocationCodeByMapXAndMapY findLocationCode;
+    private final UrlBuilderToJSONArray urlBuilderToJSONArray;
 
     public JSONObject selectTemp (String mapX, String mapY) throws IOException, ParseException {
         LocalDateTime date = LocalDateTime.now();
@@ -45,35 +47,7 @@ public class TempApi {
         urlBuilderTemp.append("&" + URLEncoder.encode("tmFc", "UTF-8") + "=" + URLEncoder.encode(now + "1800", "UTF-8")); /*날짜*/
         urlBuilderTemp.append("&" + URLEncoder.encode("regId", "UTF-8") + "=" + URLEncoder.encode(locationTemp, "UTF-8")); /*지역*/
 
-        URL urlTemp = new URL(urlBuilderTemp.toString());
-        HttpURLConnection connTemp = (HttpURLConnection) urlTemp.openConnection();
-        connTemp.setRequestMethod("GET");
-        connTemp.setRequestProperty("Content-type", "application/json");
-        BufferedReader rdTemp;
-
-        if (connTemp.getResponseCode() >= 200 && connTemp.getResponseCode() <= 300) {
-            rdTemp = new BufferedReader(new InputStreamReader(connTemp.getInputStream()));
-        } else {
-            rdTemp = new BufferedReader(new InputStreamReader(connTemp.getErrorStream()));
-        }
-
-        StringBuilder sbTemp = new StringBuilder();
-        String lineTemp;
-        while ((lineTemp = rdTemp.readLine()) != null) {
-            sbTemp.append(lineTemp);
-        }
-
-        rdTemp.close();
-        connTemp.disconnect();
-
-        String resultTemp = sbTemp.toString();
-
-        JSONParser parserTemp = new JSONParser(); // Json parser를 만들어 만들어진 문자열 데이터를 객체화
-        JSONObject objTemp = (JSONObject) parserTemp.parse(resultTemp);
-        JSONObject parse_responseTemp = (JSONObject) objTemp.get("response"); // response 키를 가지고 데이터를 파싱
-        JSONObject parse_bodyTemp = (JSONObject) parse_responseTemp.get("body"); // response 로 부터 body 찾기
-        JSONObject parse_itemsTemp = (JSONObject) parse_bodyTemp.get("items"); // body 로 부터 items 찾기
-        JSONArray parse_itemTemp = (JSONArray) parse_itemsTemp.get("item"); // items로 부터 itemlist 를 받기
+        JSONArray parse_itemTemp = urlBuilderToJSONArray.urlBuilderToJSONArray(urlBuilderTemp);
         return (JSONObject) parse_itemTemp.get(0);
     }
 
