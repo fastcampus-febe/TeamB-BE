@@ -4,16 +4,16 @@ import com.teamb.travel.dto.reply.*;
 import com.teamb.travel.service.ReplyService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 public class ReplyController {
 
-    @Autowired
-    ReplyService replyService;
+    private final ReplyService replyService;
 
     @PostMapping("/tourlist/review/update")
     public Result findReplyByReviewId(@RequestBody ReplyUpdateReqDTO replyUpdateReqDTO) {
