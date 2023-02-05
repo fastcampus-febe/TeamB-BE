@@ -1,14 +1,12 @@
 package com.teamb.travel.controller;
 
-import com.teamb.travel.dto.MapReqDTO;
-import com.teamb.travel.dto.WeatherResDTO;
-import com.teamb.travel.service.WeatherService;
+import com.teamb.travel.dto.weather.MapReqDTO;
+import com.teamb.travel.dto.weather.WeatherResDTO;
+import com.teamb.travel.service.weather.WeatherService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

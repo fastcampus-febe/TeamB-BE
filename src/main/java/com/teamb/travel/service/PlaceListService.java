@@ -1,7 +1,7 @@
 package com.teamb.travel.service;
 
-import com.teamb.travel.dto.PlaceListReqDTO;
-import com.teamb.travel.dto.PlaceListResDTO;
+import com.teamb.travel.dto.place.PlaceListReqDTO;
+import com.teamb.travel.dto.place.PlaceListResDTO;
 import com.teamb.travel.entity.IsIndoor;
 import com.teamb.travel.entity.Place;
 import com.teamb.travel.entity.PlaceDetail;
