@@ -23,7 +23,7 @@ public class ReplyController {
     }
 
     @PostMapping("/tourlist/review/check")
-    public ResponseEntity<String> replyCheck(@RequestBody ReplyCheckReqDto replyCheckReqDto) {
+    public ResponseEntity<String> replyCheck(@RequestBody ReplyCheckReqDTO replyCheckReqDto) {
         String message = replyService.findByReviewIdAndPassword(replyCheckReqDto);
 
         if (message.equals("success")) {

@@ -23,7 +23,7 @@ public class ReplyService {
                 reply.getRate(), reply.getReview());
     }
 
-    public String findByReviewIdAndPassword(ReplyCheckReqDto dto) {
+    public String findByReviewIdAndPassword(ReplyCheckReqDTO dto) {
         try {
             Reply replyBefore = dto.toEntity();
             Reply replyAfter = replyRepository.findByReviewIdAndPassword(dto.getReviewId(), dto.getPassword());

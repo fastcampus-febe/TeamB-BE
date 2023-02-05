@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-public class ReplyCheckReqDto {
+public class ReplyCheckReqDTO {
     private Long reviewId;
     private String password;
 
