@@ -22,12 +22,12 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class PlaceDetailApi {
+
     private final PlaceDetailRepository placeDetailRepository;
     private final PlaceRepository placeRepository;
+
     int count = 9915;
-    private  int NUMBER = count;
-//614
-    //2794
+    private int NUMBER = count;
 
 //    @PostConstruct
     public void tourDetailTestCheck() throws IOException, ParseException, org.json.simple.parser.ParseException {
