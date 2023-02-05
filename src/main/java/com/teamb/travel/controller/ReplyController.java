@@ -1,11 +1,10 @@
 package com.teamb.travel.controller;
 
-import com.teamb.travel.dto.*;
+import com.teamb.travel.dto.reply.*;
 import com.teamb.travel.service.ReplyService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

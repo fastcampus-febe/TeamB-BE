@@ -1,4 +1,4 @@
-package com.teamb.travel.dto;
+package com.teamb.travel.dto.reply;
 
 import com.teamb.travel.entity.Place;
 import com.teamb.travel.entity.Reply;

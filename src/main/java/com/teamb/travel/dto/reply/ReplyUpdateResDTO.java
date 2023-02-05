@@ -1,4 +1,4 @@
-package com.teamb.travel.dto;
+package com.teamb.travel.dto.reply;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,5 @@
 package com.teamb.travel.repository;
 
-import com.teamb.travel.dto.ReplyCheckReqDto;
 import com.teamb.travel.entity.Reply;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

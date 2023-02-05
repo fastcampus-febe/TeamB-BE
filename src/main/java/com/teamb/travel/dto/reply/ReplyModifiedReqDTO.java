@@ -1,4 +1,4 @@
-package com.teamb.travel.dto;
+package com.teamb.travel.dto.reply;
 
 import lombok.Data;
 
