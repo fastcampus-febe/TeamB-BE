@@ -1,5 +1,6 @@
 package com.teamb.travel.api.weather;
 
+import com.teamb.travel.api.DataType;
 import com.teamb.travel.api.UrlBuilderToJSONArray;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -42,7 +43,7 @@ public class TempApi {
         urlBuilderTemp.append("&" + URLEncoder.encode("tmFc", "UTF-8") + "=" + URLEncoder.encode(now + "1800", "UTF-8")); /*날짜*/
         urlBuilderTemp.append("&" + URLEncoder.encode("regId", "UTF-8") + "=" + URLEncoder.encode(locationTemp, "UTF-8")); /*지역*/
 
-        JSONArray parse_itemTemp = urlBuilderToJSONArray.urlBuilderToJSONArray(urlBuilderTemp);
+        JSONArray parse_itemTemp = urlBuilderToJSONArray.urlBuilderToJSONArray(urlBuilderTemp, DataType.JSON);
         return (JSONObject) parse_itemTemp.get(0);
     }
 

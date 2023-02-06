@@ -1,5 +1,6 @@
 package com.teamb.travel.api.weather;
 
+import com.teamb.travel.api.DataType;
 import com.teamb.travel.api.UrlBuilderToJSONArray;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -32,7 +33,7 @@ public class ShortWeatherApi {
         urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode(String.valueOf(Math.round(Float.parseFloat(mapY))), "UTF-8")); /*예보지점의 X 좌표값*/
         urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode(String.valueOf(Math.round(Float.parseFloat(mapX))), "UTF-8")); /*예보지점의 Y 좌표값*/
 
-        return urlBuilderToJSONArray.urlBuilderToJSONArray(urlBuilder);
+        return urlBuilderToJSONArray.urlBuilderToJSONArray(urlBuilder, DataType.JSON);
     }
 
 }
