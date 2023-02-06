@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.json.XML;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -22,6 +23,8 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class PlaceDetailApi {
+    @Value("${api.serviceKey}")
+    private String serviceKey;
 
     private final PlaceDetailRepository placeDetailRepository;
     private final PlaceRepository placeRepository;
@@ -39,7 +42,7 @@ public class PlaceDetailApi {
                 StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551011/KorService/detailCommon"); /*URL*/
                 NUMBER = i;
                 // 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.
-                urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + "51%2Bc6%2BNBpG7JFhyeZbKn4BDMVtvgE6W15oUad4G2n74%2Bv7Bo4oHKoQL%2FwLSaBnD67u%2F5CorapB5I6WMBLpXEkg%3D%3D"); /*Service Key*/
+                urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + serviceKey); /*Service Key*/
                 urlBuilder.append("&" + URLEncoder.encode("contentTypeId", "UTF-8") + "=" + URLEncoder.encode("12", "UTF-8")); /*지역*/
                 urlBuilder.append("&" + URLEncoder.encode("contentId", "UTF-8") + "=" + URLEncoder.encode(contentIds.get(i), "UTF-8")); /*지역*/
                 urlBuilder.append("&" + URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8")); /*XML 또는 JSON*/
