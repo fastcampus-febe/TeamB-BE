@@ -29,7 +29,7 @@ public class TempApi {
         LocalDateTime date = LocalDateTime.now();
         LocalDate localDate = LocalDate.now();
 
-        if (date.getHour() < 18) {
+        if (date.getHour() < 6) {
             localDate = LocalDate.now().minusDays(1);
         }
 
@@ -43,7 +43,7 @@ public class TempApi {
         urlBuilderTemp.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*XML 또는 JSON*/
         urlBuilderTemp.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilderTemp.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
-        urlBuilderTemp.append("&" + URLEncoder.encode("tmFc", "UTF-8") + "=" + URLEncoder.encode(now + "1800", "UTF-8")); /*날짜*/
+        urlBuilderTemp.append("&" + URLEncoder.encode("tmFc", "UTF-8") + "=" + URLEncoder.encode(now + "0600", "UTF-8")); /*날짜*/
         urlBuilderTemp.append("&" + URLEncoder.encode("regId", "UTF-8") + "=" + URLEncoder.encode(locationTemp, "UTF-8")); /*지역*/
 
         JSONArray parse_itemTemp = urlBuilderToJSONArray.urlBuilderToJSONArray(urlBuilderTemp, DataType.JSON);
