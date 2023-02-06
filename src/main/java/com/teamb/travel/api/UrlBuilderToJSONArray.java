@@ -1,5 +1,6 @@
 package com.teamb.travel.api;
 
+import org.json.XML;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,7 +18,7 @@ public class UrlBuilderToJSONArray {
 
     // urlBuilder(StringBuilder)를 매개변수로 받아
     // response - body - items 안에 있는 item List를 JSONArray로 반환하는 메서드
-    public JSONArray urlBuilderToJSONArray (StringBuilder urlBuilder) throws IOException, ParseException {
+    public JSONArray urlBuilderToJSONArray (StringBuilder urlBuilder, String dataType) throws IOException, ParseException {
 
         // 1. urlBuilder(StringBuilder)로부터 URL 객체 생성.
         URL url = new URL(urlBuilder.toString());
@@ -54,10 +55,18 @@ public class UrlBuilderToJSONArray {
         rd.close();
         conn.disconnect();
 
-        // result는 api로부터 받아온 값
-        String result = sb.toString();
+        // 9. 전달받은 데이터(result는 api로부터 받아온 값), dataType에 따라 변환 방법이 다름
+        String result = "";
+        if (dataType.equalsIgnoreCase("JSON")) {
+            result = sb.toString();
+        } else if (dataType.equalsIgnoreCase("XML")) {
+            org.json.JSONObject json = XML.toJSONObject(String.valueOf(sb));
+            result = json.toString(4);
+        }
+//        System.out.println("result : " + result);
 
-        JSONParser parser = new JSONParser(); // Json parser를 만들어 만들어진 문자열 데이터를 객체화
+        // 10. Json parser를 만들어 만들어진 문자열 데이터를 객체화
+        JSONParser parser = new JSONParser();
         JSONObject obj = (JSONObject) parser.parse(result);
 
         JSONObject parse_response = (JSONObject) obj.get("response"); // response 키를 가지고 데이터를 파싱
