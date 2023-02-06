@@ -3,8 +3,6 @@ package com.teamb.travel.api;
 import com.teamb.travel.entity.Place;
 import com.teamb.travel.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONObject;
-import org.json.XML;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -24,6 +22,7 @@ import java.util.ArrayList;
 public class PlaceApi {
 
     private final PlaceRepository repository;
+    private final UrlBuilderToJSONArray urlBuilderToJSONArray;
 
     public void tourCheck() throws IOException, ParseException {
 
@@ -43,52 +42,7 @@ public class PlaceApi {
         urlBuilder.append("&" + URLEncoder.encode("cat2", "UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*지역*/
         urlBuilder.append("&" + URLEncoder.encode("cat3", "UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*지역*/
 
-        // 3. URL 객체 생성.
-        URL url = new URL(urlBuilder.toString());
-
-        // 4. 요청하고자 하는 URL과 통신하기 위한 Connection 객체 생성.
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-        // 5. 통신을 위한 메소드 SET.
-        conn.setRequestMethod("GET");
-
-        // 6. 통신을 위한 Content-type SET.
-        conn.setRequestProperty("Content-type", "application/json");
-
-        // 7. 통신 응답 코드 확인.
-        System.out.println("Response code: " + conn.getResponseCode());
-
-        // 8. 전달받은 데이터를 BufferedReader 객체로 저장.
-        BufferedReader rd;
-        if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-        }
-
-        // 9. 저장된 데이터를 라인별로 읽어 StringBuilder 객체로 저장.
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-
-        // 10. 객체 해제.
-        rd.close();
-        conn.disconnect();
-
-        System.out.println(urlBuilder);
-        // 11. 전달받은 데이터 확인.
-        JSONObject json = XML.toJSONObject(String.valueOf(sb));
-        String jsonStr = json.toString(4);
-        System.out.println(jsonStr);
-
-        JSONParser parser = new JSONParser(); // Json parser를 만들어 만들어진 문자열 데이터를 객체화
-        org.json.simple.JSONObject obj = (org.json.simple.JSONObject) parser.parse(jsonStr);
-        org.json.simple.JSONObject parse_response = (org.json.simple.JSONObject) obj.get("response"); // response 키를 가지고 데이터를 파싱
-        org.json.simple.JSONObject parse_body = (org.json.simple.JSONObject) parse_response.get("body"); // response 로 부터 body 찾기
-        org.json.simple.JSONObject parse_items = (org.json.simple.JSONObject) parse_body.get("items"); // body 로 부터 items 찾기
-        JSONArray parse_item = (JSONArray) parse_items.get("item"); // items로 부터 itemlist 를 받기
+        JSONArray parse_item = urlBuilderToJSONArray.urlBuilderToJSONArray(urlBuilder, DataType.XML);
 
         ArrayList<Place> placeArrayList = new ArrayList<>();
 
