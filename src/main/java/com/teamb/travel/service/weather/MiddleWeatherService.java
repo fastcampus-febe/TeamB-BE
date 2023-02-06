@@ -29,17 +29,15 @@ public class MiddleWeatherService {
 
         LocalDateTime date = LocalDateTime.now();
         LocalDate localDate = LocalDate.now();
-        int result = 3;
 
         if (date.getHour() < 6) {
             localDate = LocalDate.now().minusDays(1);
-            result = 4;
         }
 
         JSONObject keyObj = middleLastWeatherDetailApi.selectWeatherDetail(mapX, mapY);
         JSONObject keyObjTemp = tempApi.selectTemp(mapX, mapY);
 
-        for (int i = result; i < 8; i++) {
+        for (int i = 3; i < 8; i++) {
             LocalDate dateList = localDate.plusDays(i);
             String rainAm = String.valueOf(keyObj.get("rnSt" + i + "Am"));
             String rainPm = String.valueOf(keyObj.get("rnSt" + i + "Pm"));
