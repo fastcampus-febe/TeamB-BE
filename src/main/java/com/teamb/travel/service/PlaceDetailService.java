@@ -14,6 +14,7 @@ import com.teamb.travel.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,8 +37,11 @@ public class PlaceDetailService {
         PlaceDetailMaker placeDetailMaker = new PlaceDetailMaker(placeDetail);
 
         Double placeDetailPageRate = replyRepository.findByPlaceDetailInNativeQuery(contenid);
-        IsIndoor findInOut = isIndoorRepository.findAllByMapXAndMapY(placeMaker.getMapx(), placeMaker.getMapy());
-        EtcMaker etcMaker = new EtcMaker(placeDetailPageRate, findInOut);
+        List<IsIndoor> findInOuts = isIndoorRepository.findAllByMapXAndMapY(placeMaker.getMapx(), placeMaker.getMapy());
+        if (findInOuts.size() == 0) {
+            findInOuts.add(new IsIndoor());
+        }
+        EtcMaker etcMaker = new EtcMaker(placeDetailPageRate, findInOuts.get(0));
 
         return new PlaceDetailResDTO(placeMaker, placeDetailMaker, etcMaker);
     }

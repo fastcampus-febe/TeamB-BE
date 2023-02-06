@@ -17,10 +17,10 @@ public class EtcMaker {
         } else {
             this.rate = rate;
         }
-        if (isIndoor == null) {
-            inOut = null;
-        }else{
-            inOut = isIndoor.getInOut();}
-
+        if (isIndoor.getInOut() == null) {
+            inOut = "";
+        } else {
+            inOut = isIndoor.getInOut();
+        }
     }
 }
