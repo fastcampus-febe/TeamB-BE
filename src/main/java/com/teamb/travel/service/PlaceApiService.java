@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 @Service
@@ -18,14 +19,15 @@ public class PlaceApiService {
     private final PlaceApi placeApi;
     private final PlaceRepository placeRepository;
 
+//    @PostConstruct
     public void savePlacesFromPlaceApi() throws IOException, ParseException {
         JSONArray placesJSONArray = placeApi.placesJSONArray();
 
         for (int i = 0; i < placesJSONArray.size(); i++) {
-            // JSONArray에서 JSONObject를 하나씩 가져오면서
+            // 1. JSONArray에서 JSONObject를 하나씩 가져오면서
             JSONObject placeJSONObject = (JSONObject) placesJSONArray.get(i);
 
-            // Place로 만들고,
+            // 2. Place로 만들고,
             Place place = new Place(
                     String.valueOf(placeJSONObject.get("addr1")),
                     String.valueOf(placeJSONObject.get("addr2")),
@@ -50,7 +52,7 @@ public class PlaceApiService {
                     String.valueOf(placeJSONObject.get("zipcode"))
             );
 
-            // 그 Place를 DB에 저장함
+            // 3. 그 Place를 DB에 저장함 (반복)
             placeRepository.save(place);
         }
     }

@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 @Component
 @RequiredArgsConstructor
 public class PlaceApi {
+
     @Value("${api.serviceKey}")
     private String serviceKey;
 
@@ -39,5 +40,4 @@ public class PlaceApi {
 
         return urlBuilderToJSONArray.urlBuilderToJSONArray(urlBuilder, DataType.XML);
     }
-
 }
