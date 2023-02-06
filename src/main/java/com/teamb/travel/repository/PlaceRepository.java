@@ -1,6 +1,7 @@
 package com.teamb.travel.repository;
 
 import com.teamb.travel.entity.Place;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,12 +16,14 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     @Query(value = "select p.contentid from place p", nativeQuery = true)
     List<String> findByAllContentid();
 
-    List<Place> findAllByAreacodeOrderByIdAsc(String areaCode, Pageable pageable);
+    Page<Place> findAllByAreacodeOrderByIdAsc(String areaCode, Pageable pageable);
 
-    List<Place> findAllByCat3InOrderByIdAsc(List<String> hashtag, Pageable pageable);
+    Page<Place> findAllByCat3InOrderByIdAsc(List<String> hashtag, Pageable pageable);
 
     // where title like '%title%' : 해당 title이 포함된 Place들을 반환
-    List<Place> findPlacesByTitleContaining(String title, Pageable pageable);
+    Page<Place> findPlacesByTitleContaining(String title, Pageable pageable);
 
     Optional<Place> findPlaceByContentid(String contentid);
+
 }
+

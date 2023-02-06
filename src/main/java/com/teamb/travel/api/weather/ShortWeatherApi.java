@@ -22,7 +22,7 @@ public class ShortWeatherApi {
 
     private final UrlBuilderToJSONArray urlBuilderToJSONArray;
 
-    public JSONArray selectShortWeatherJSON (String mapX, String mapY, int pageNo) throws IOException, ParseException {
+    public JSONArray selectShortWeatherJSON (String mapX, String mapY, int pageNo) throws IOException, ParseException, NullPointerException {
 
         String yesterday = LocalDate.now().minusDays(1).toString().replace("-", "");
 

@@ -25,7 +25,7 @@ public class TempApi {
     private final FindLocationCodeByMapXAndMapY findLocationCode;
     private final UrlBuilderToJSONArray urlBuilderToJSONArray;
 
-    public JSONObject selectTemp (String mapX, String mapY) throws IOException, ParseException {
+    public JSONObject selectTemp (String mapX, String mapY) throws IOException, ParseException, NullPointerException {
         LocalDateTime date = LocalDateTime.now();
         LocalDate localDate = LocalDate.now();
 

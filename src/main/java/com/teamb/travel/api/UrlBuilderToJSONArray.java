@@ -18,7 +18,7 @@ public class UrlBuilderToJSONArray {
 
     // urlBuilder(StringBuilder)를 매개변수로 받아
     // response - body - items 안에 있는 item List를 JSONArray로 반환하는 메서드
-    public JSONArray urlBuilderToJSONArray (StringBuilder urlBuilder, DataType dataType) throws IOException, ParseException {
+    public JSONArray urlBuilderToJSONArray (StringBuilder urlBuilder, DataType dataType) throws IOException, ParseException, NullPointerException {
 
         // 1. urlBuilder(StringBuilder)로부터 URL 객체 생성.
         URL url = new URL(urlBuilder.toString());
