@@ -107,7 +107,7 @@ public class PlaceListService {
     }
 
     private PageRequest getPageInfo(Pageable pageable) {
-        return PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("contentid"));
+        return PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id"));
     }
 
     private PlaceListResDTO placeTranslate(Place place) {
