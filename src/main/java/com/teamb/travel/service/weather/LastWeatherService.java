@@ -30,7 +30,7 @@ public class LastWeatherService {
         LocalDateTime date = LocalDateTime.now();
         LocalDate localDate = LocalDate.now();
 
-        if (date.getHour() < 18) {
+        if (date.getHour() < 6) {
             localDate = LocalDate.now().minusDays(1);
         }
 
