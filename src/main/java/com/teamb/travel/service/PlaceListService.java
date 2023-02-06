@@ -54,7 +54,8 @@ public class PlaceListService {
                 rates.add(avgRate);
             }
 
-            IsIndoor indoors = indoorRepository.findAllByMapXAndMapY(place.getMapx().substring(0, 7), place.getMapy().substring(0, 6));
+            List<IsIndoor> findInOuts = indoorRepository.findAllByMapXAndMapY(place.getMapx().substring(0, 7), place.getMapy().substring(0, 6));
+            IsIndoor indoors = findInOuts.get(0);
             if (indoors == null) {
                 inOuts.add("");
             } else {
@@ -121,11 +122,15 @@ public class PlaceListService {
             avgRate = 0.0;
         }
 
-        IsIndoor indoors = indoorRepository.findAllByMapXAndMapY(place.getMapx().substring(0, 7), place.getMapy().substring(0, 6));
+        List<IsIndoor> findInOuts = indoorRepository.findAllByMapXAndMapY(place.getMapx().substring(0, 7), place.getMapy().substring(0, 6));
+        IsIndoor indoors;
         String inOut;
         try {
+            indoors = findInOuts.get(0);
             inOut = indoors.getInOut();
         } catch (NullPointerException e) {
+            inOut = "";
+        } catch (IndexOutOfBoundsException e) {
             inOut = "";
         }
 
