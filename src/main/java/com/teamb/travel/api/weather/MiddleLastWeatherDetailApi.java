@@ -25,7 +25,7 @@ public class MiddleLastWeatherDetailApi {
     private final FindLocationCodeByMapXAndMapY findLocationCode;
     private final UrlBuilderToJSONArray urlBuilderToJSONArray;
 
-    public JSONObject selectWeatherDetail(String mapX, String mapY) throws IOException, ParseException {
+    public JSONObject selectWeatherDetail(String mapX, String mapY) throws IOException, ParseException, NullPointerException {
         LocalDateTime date = LocalDateTime.now();
         LocalDate localDate = LocalDate.now();
 
