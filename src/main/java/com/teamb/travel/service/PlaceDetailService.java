@@ -1,13 +1,12 @@
 package com.teamb.travel.service;
 
-import com.teamb.travel.dto.PlaceDetailResDTO;
-import com.teamb.travel.dto.detailMaker.EtcMaker;
-import com.teamb.travel.dto.detailMaker.PlaceDetailMaker;
-import com.teamb.travel.dto.detailMaker.PlaceMaker;
+import com.teamb.travel.dto.place.PlaceDetailResDTO;
+import com.teamb.travel.dto.place.detailMaker.EtcMaker;
+import com.teamb.travel.dto.place.detailMaker.PlaceDetailMaker;
+import com.teamb.travel.dto.place.detailMaker.PlaceMaker;
 import com.teamb.travel.entity.IsIndoor;
 import com.teamb.travel.entity.Place;
 import com.teamb.travel.entity.PlaceDetail;
-import com.teamb.travel.entity.Reply;
 import com.teamb.travel.repository.IsIndoorRepository;
 import com.teamb.travel.repository.PlaceDetailRepository;
 import com.teamb.travel.repository.PlaceRepository;
@@ -15,6 +14,7 @@ import com.teamb.travel.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,8 +37,11 @@ public class PlaceDetailService {
         PlaceDetailMaker placeDetailMaker = new PlaceDetailMaker(placeDetail);
 
         Double placeDetailPageRate = replyRepository.findByPlaceDetailInNativeQuery(contenid);
-        IsIndoor findInOut = isIndoorRepository.findAllByMapXAndMapY(placeMaker.getMapx(), placeMaker.getMapy());
-        EtcMaker etcMaker = new EtcMaker(placeDetailPageRate, findInOut);
+        List<IsIndoor> findInOuts = isIndoorRepository.findAllByMapXAndMapY(placeMaker.getMapx(), placeMaker.getMapy());
+        if (findInOuts.size() == 0) {
+            findInOuts.add(new IsIndoor());
+        }
+        EtcMaker etcMaker = new EtcMaker(placeDetailPageRate, findInOuts.get(0));
 
         return new PlaceDetailResDTO(placeMaker, placeDetailMaker, etcMaker);
     }

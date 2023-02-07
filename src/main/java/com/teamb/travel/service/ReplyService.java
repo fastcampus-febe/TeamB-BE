@@ -1,15 +1,13 @@
 package com.teamb.travel.service;
 
-import com.teamb.travel.dto.*;
+import com.teamb.travel.dto.reply.*;
 import com.teamb.travel.entity.Reply;
 import com.teamb.travel.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +23,7 @@ public class ReplyService {
                 reply.getRate(), reply.getReview());
     }
 
-    public String findByReviewIdAndPassword(ReplyCheckReqDto dto) {
+    public String findByReviewIdAndPassword(ReplyCheckReqDTO dto) {
         try {
             Reply replyBefore = dto.toEntity();
             Reply replyAfter = replyRepository.findByReviewIdAndPassword(dto.getReviewId(), dto.getPassword());

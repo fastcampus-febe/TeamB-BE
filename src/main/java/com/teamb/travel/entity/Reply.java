@@ -1,7 +1,7 @@
 package com.teamb.travel.entity;
 
-import com.teamb.travel.dto.ReplyModifiedReqDTO;
-import com.teamb.travel.dto.ReplyRequestDTO;
+import com.teamb.travel.dto.reply.ReplyModifiedReqDTO;
+import com.teamb.travel.dto.reply.ReplyRequestDTO;
 import lombok.*;
 
 import javax.persistence.*;
