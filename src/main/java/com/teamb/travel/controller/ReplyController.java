@@ -12,13 +12,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@Api(tags = {"댓글 관련 API"}, description = "댓글 CRUD API")
+@Api(tags = {"관광지 리뷰 관련 API"}, description = "리뷰 CRUD API")
 @RestController
 @RequiredArgsConstructor
 public class ReplyController {
 
     private final ReplyService replyService;
 
+    @ApiOperation(value = "리뷰 수정 버튼", notes = "리뷰 수정 버튼을 클릭 시 reviewId에 해당하는 리뷰 정보를 반환한다.")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "reviewId", value = "리뷰의 작성 번호" ,required = true )
+    })
     @PostMapping("/tourlist/review/update")
     public Result findReplyByReviewId(@RequestBody ReplyUpdateReqDTO replyUpdateReqDTO) {
 
@@ -76,7 +80,7 @@ public class ReplyController {
         return responseEntity;
     }
 
-    @ApiOperation(value = "리뷰 수정 버튼", notes = "리뷰를 수정하는 API")
+    @ApiOperation(value = "리뷰 수정 완료 버튼", notes = "리뷰를 수정하는 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "reviewId", value = "리뷰의 작성 번호" ,required = true ),
             @ApiImplicitParam(name = "visitDate", value = "리뷰를 작성한 사람의 방문날짜" ,required = true ),

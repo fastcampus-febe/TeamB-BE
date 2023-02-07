@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(tags = {"날씨 조회 API"}, description = "조회 API")
+@Api(tags = {"관광지 리스트 API"}, description = "검색 조건에 맞는 관광지들을 List로 반환한다")
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -27,9 +27,9 @@ public class PlaceListController {
 
     private final PlaceListService placeListService;
 
-    @ApiOperation(value = "키워드로 검색", notes = "키워드로 검색된 관광지, 관광지 평점, 실내외여부를 가나다 오름차순으로 호출한다.")
+    @ApiOperation(value = "키워드(관광지명)로 검색", notes = "해당 관광지명이 포함된 모든 관광지를 오름차순으로 반환한다.")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "keyword", value = "키워드", required = true),
+            @ApiImplicitParam(name = "keyword", value = "키워드(관광지명)", required = true),
             @ApiImplicitParam(name = "pageno", value = "페이지 넘버"),
             @ApiImplicitParam(name = "size", value = "페이지에 들어오는 데이터 갯수"),
     })
