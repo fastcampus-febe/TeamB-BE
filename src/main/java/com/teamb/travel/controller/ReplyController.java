@@ -60,7 +60,6 @@ public class ReplyController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "memberId", value = "리뷰를 작성한 멤버의 id" ,required = true ),
             @ApiImplicitParam(name = "password", value = "리뷰를 작성한 멤버의 password" ,required = true ),
-            @ApiImplicitParam(name = "placeTitle", value = "관광지의 placeTitle" ,required = true ),
             @ApiImplicitParam(name = "contentid", value = "리뷰가 작성된 관광지의 contentid" ,required = true ),
             @ApiImplicitParam(name = "visitDate", value = "리뷰를 작성한 사람의 방문날짜" ,required = true ),
             @ApiImplicitParam(name = "weather", value = "리뷰를 작성한 사람의 방문시 날씨" ,required = true ),

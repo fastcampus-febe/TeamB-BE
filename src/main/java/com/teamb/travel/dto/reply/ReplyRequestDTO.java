@@ -8,7 +8,6 @@ import java.time.LocalDate;
 public class ReplyRequestDTO {
     private String memberId;
     private String password;
-    private String placeTitle;
     private String contentid;
     private LocalDate visitDate;
     private String weather;
