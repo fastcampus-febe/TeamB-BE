@@ -220,5 +220,5 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 application-profile.properties
-keystore.jks
+keystore.p12
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij+all,gradle,windows,macos,visualstudiocode
