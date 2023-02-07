@@ -26,7 +26,7 @@ public class ReplyController {
         return new Result(replyUpdateResDTO);
     }
 
-    @ApiOperation(value = "리뷰 삭제/수정을 위한 본인 확인", notes = "리뷰 삭제/조회을 위한 본인 확인 API")
+    @ApiOperation(value = "리뷰 삭제/수정을 위한 본인 확인", notes = "리뷰 삭제/수정을 위한 본인 확인 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "reviewId", value = "리뷰의 작성 번호" ,required = true ),
             @ApiImplicitParam(name = "password", value = "리뷰를 작성한 멤버의 password" ,required = true )
