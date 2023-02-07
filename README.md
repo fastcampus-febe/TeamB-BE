@@ -1,1 +1,12 @@
-날짜 및 장소에 따른 관광지 추천 서비스
+- 관광지 추천 서비스 (프로젝트 기획, 개발, 리팩토링, 배포)
+- **관광지 검색(Pagination), 관광지 날씨 조회, 관광지 상세정보, 리뷰** 기능 개발
+- REST API로 개발 (BackEnd-FrontEnd 협업 프로젝트, View는 FrontEnd에서 개발)
+- Open API 사용 : 날씨 api, 관광지 api
+- API 명세서 : https://documenter.getpostman.com/view/24197140/2s8ZDcyKWn
+- JDK 11, Spring Boot 2.7.8, Gradle
+- MariaDB, Lombok, Spring Data JPA
+- git-flow 전략 사용
+- Tools : IntelliJ, DBeaver, Git, Github, GitKraken,
+    Postman(Mock Server, API Docs), Swagger, Amazon EC2 (배포),
+    Notion, Google Sheets, Slack, ErdCloud
+- 이외 자세한 내용은 코드 및 document 폴더 참고 부탁드립니다
