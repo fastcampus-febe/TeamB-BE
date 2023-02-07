@@ -10,3 +10,10 @@
     Postman(Mock Server, API Docs), Swagger, Amazon EC2 (배포),
     Notion, Google Sheets, Slack, ErdCloud
 - 이외 자세한 내용은 코드 및 document 폴더 참고 부탁드립니다
+
+[ 배포 ]
+- Swagger https://3.34.61.197/swagger-ui.html#
+- hashtag 검색 예시
+https://3.34.61.197/tourlist/hashtag?pageno=1&hashtag=%ED%8F%AD%ED%8F%AC&hashtag=%EC%95%BD%EC%88%98%ED%84%B0
+- 지역 검색 예시
+https://3.34.61.197/tourlist/location?pageno=1&areacode=39
