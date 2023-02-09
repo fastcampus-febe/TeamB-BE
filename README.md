@@ -1,3 +1,8 @@
+## 관광지 추천 서비스 API
+
+---
+
+
 - 관광지 추천 서비스 (프로젝트 기획, 개발, 리팩토링, 배포)
 - **관광지 검색(Pagination), 관광지 날씨 조회, 관광지 상세정보, 리뷰** 기능 개발
 - REST API로 개발 (BackEnd-FrontEnd 협업 프로젝트, View는 FrontEnd에서 개발)
@@ -17,3 +22,10 @@
 https://3.34.61.197/tourlist/hashtag?pageno=1&hashtag=%ED%8F%AD%ED%8F%AC&hashtag=%EC%95%BD%EC%88%98%ED%84%B0
 - 지역 검색 예시
 https://3.34.61.197/tourlist/location?pageno=1&areacode=39
+
+
+## 참여 한 사람
+
+* 권동현 [github](https://github.com/DongHyos)
+* 김예은 [github](https://github.com/maemae22)
+* 전홍석 [github](https://github.com/codingvegeta)
