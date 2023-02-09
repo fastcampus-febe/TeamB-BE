@@ -9,6 +9,9 @@
 - REST API로 개발 (BackEnd-FrontEnd 협업 프로젝트, View는 FrontEnd에서 개발)
 - Open API 사용 : 날씨 api, 관광지 api
 - API 명세서 : https://documenter.getpostman.com/view/24197140/2s8ZDcyKWn
+
+## 사용한 기술
+
 - JDK 11, Spring Boot 2.7.8, Gradle
 - MariaDB, Lombok, Spring Data JPA
 - git-flow 전략 사용
