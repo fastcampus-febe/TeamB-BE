@@ -10,15 +10,15 @@ import com.teamb.travel.repository.PlaceDetailRepository;
 import com.teamb.travel.repository.PlaceRepository;
 import com.teamb.travel.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -74,6 +74,8 @@ public class PlaceListService {
         return placeListResDTOS;
     }
 
+    @Transactional(readOnly = true)
+    @Cacheable(value = "tourlist", key = "#placeListReqDTO.title")
     public Page<PlaceListResDTO> selectPlacesByTitleContaining(PlaceListReqDTO placeListReqDTO, Pageable pageable) {
         PageRequest pageInfo = getPageInfo(pageable);
 
@@ -83,6 +85,8 @@ public class PlaceListService {
         return selectByTitlePlacePage;
     }
 
+    @Transactional(readOnly = true)
+    @Cacheable(value = "tourlist",key = "#areaCode")
     public Page<PlaceListResDTO> selectByLocationPlaceList(String areaCode, Pageable pageable) {
         PageRequest pageInfo = getPageInfo(pageable);
 
@@ -91,6 +95,8 @@ public class PlaceListService {
         return locationPlacePage;
     }
 
+    @Transactional(readOnly = true)
+    @Cacheable(value = "tourlist", key = "#hashtag")
     public Page<PlaceListResDTO> selectByTagPlaceList(List<String> hashtag, Pageable pageable) {
         PageRequest pageInfo = getPageInfo(pageable);
 
@@ -99,6 +105,8 @@ public class PlaceListService {
         return tagPlacePage;
     }
 
+    @Transactional(readOnly = true)
+    @Cacheable(value = "tourlist")
     public Page<PlaceListResDTO> mainPlaceTourlist(Pageable pageable) {
         PageRequest pageInfo = getPageInfo(pageable);
 
