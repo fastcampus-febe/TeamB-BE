@@ -15,7 +15,7 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
     Reply findReplyByReviewId(long reviewId);
 
-    @Query(value = "select round(avg(r.rate), 1) from reply r where r.contentid IN (:contentid)", nativeQuery = true)
+    @Query(value = "select ROUND(AVG(r.rate), 1) from Reply r where r.placeDetailContentid IN (:contentid)")
     Double findByPlaceDetailInNativeQuery(@Param("contentid") String contentid);
 
     Reply findByReviewIdAndPassword(Long reviewId, String password);
