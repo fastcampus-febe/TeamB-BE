@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 
-    @Query(value = "select p.contentid from place p", nativeQuery = true)
+    @Query(value = "select p.contentid from Place p")
     List<String> findByAllContentid();
 
     Page<Place> findAllByAreacodeOrderByIdAsc(String areaCode, Pageable pageable);
