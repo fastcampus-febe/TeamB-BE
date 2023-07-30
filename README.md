@@ -1,35 +1,35 @@
-# ☀️ 관광지 추천 서비스 API
+# <img src="https://static.vecteezy.com/system/resources/previews/011/003/356/original/cute-travel-icon-free-png.png" style="width: 10%;"><img src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png" style="width: 5%;"><img src="https://cdn-icons-png.flaticon.com/512/4652/4652326.png" style="width: 5%;">&nbsp; 날씨 정보와 함께 관광지를 추천해주는 서비스 
+<br>
 
----
+날씨 정보와 함께 관광지를 추천해주는 서비스 'with the weather'입니다.<br>
+<br>
+개발 기간 : 2023.01 ~ 2023.02<br>
+개발 인원 : 백엔드 3명 / 프론트엔드 3명 (팀 프로젝트)<br>
+Code (Github) : https://github.com/fastcampus-febe/TeamB-BE<br>
+API 명세서 : https://documenter.getpostman.com/view/24197140/2s8ZDcyKWn<br>
+<br>
+## 개발 환경
 
+언어 : Java 11<br>
+프레임워크 : Spring Boot 2.7.8, Spring Data JPA<br>
+DB : MariaDB 10.2 (cloudtype)<br>
+IDE : IntelliJ<br>
+Tools : Git, GitHub, GitKraken, DBeaver, Postman<br>
+Open API : 한국관광공사 TourAPI 4.0 (관광지), 공공데이터포털 기상청 예보 API (날씨)<br>
+<br>
 
-## 관광지 추천 서비스 (프로젝트 기획, 개발, 리팩토링, 배포)
+## Project Architecture
+<img src="https://github.com/fastcampus-febe/TeamB-BE/assets/101652279/a80acb4b-9d1a-4124-ad9e-f1f4bdb4b533" style="width: 70%;">
+<br><br>
 
+## 특징
 - **관광지 검색(Pagination), 관광지 날씨 조회, 관광지 상세정보, 리뷰** 기능 개발
 - REST API로 개발 (BackEnd-FrontEnd 협업 프로젝트, View는 FrontEnd에서 개발)
-- Open API 사용 : 날씨 api, 관광지 api
-- API 명세서 : https://documenter.getpostman.com/view/24197140/2s8ZDcyKWn
-
-## 사용한 기술
-
-- JDK 11, Spring Boot 2.7.8, Gradle
-- MariaDB, Lombok, Spring Data JPA
+- Open API 사용 : 한국관광공사 TourAPI 4.0 (관광지), 공공데이터포털 기상청 예보 API (날씨)
 - git-flow 전략 사용
-- Tools : IntelliJ, DBeaver, Git, Github, GitKraken,
-    Postman(Mock Server, API Docs), Swagger, Amazon EC2 (배포),
-    Notion, Google Sheets, Slack, ErdCloud
-- 이외 자세한 내용은 코드 및 document 폴더 참고 부탁드립니다
+<br>
 
-## [ 배포 ]
-- Swagger https://3.34.61.197/swagger-ui.html#
-- hashtag 검색 예시
-https://3.34.61.197/tourlist/hashtag?pageno=1&hashtag=%ED%8F%AD%ED%8F%AC&hashtag=%EC%95%BD%EC%88%98%ED%84%B0
-- 지역 검색 예시
-https://3.34.61.197/tourlist/location?pageno=1&areacode=39
-
-
-## 참여 한 사람
-
-* 권동현 [github](https://github.com/DongHyos)
-* 김예은 [github](https://github.com/maemae22)
-* 전홍석 [github](https://github.com/codingvegeta)
+## 참여한 사람
+\- 김예은 [github](https://github.com/maemae22) (백엔드 팀장)<br>
+\- 권동현 [github](https://github.com/DongHyos)<br>
+\- 전홍석 [github](https://github.com/codingvegeta)<br>
