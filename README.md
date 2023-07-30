@@ -1,4 +1,4 @@
-# <img src="https://static.vecteezy.com/system/resources/previews/011/003/356/original/cute-travel-icon-free-png.png" style="width: 10%;"><img src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png" style="width: 5%;"><img src="https://cdn-icons-png.flaticon.com/512/4652/4652326.png" style="width: 5%;">&nbsp; 날씨 정보와 함께 관광지를 추천해주는 서비스 
+# <img src="https://static.vecteezy.com/system/resources/previews/011/003/356/original/cute-travel-icon-free-png.png" style="width: 5%;"><img src="https://cdn-icons-png.flaticon.com/512/1974/1974031.png" style="width: 5%;"><img src="https://cdn-icons-png.flaticon.com/512/4652/4652326.png" style="width: 5%;">&nbsp; 날씨 정보와 함께 관광지를 추천해주는 서비스 
 <br>
 
 날씨 정보와 함께 관광지를 추천해주는 서비스 'with the weather'입니다.<br>
